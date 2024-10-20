@@ -39,7 +39,7 @@
 </head>
 <body>
   <div class="container">
-    <a href="{{ route('login') }}" style="padding: 10px 30px 10px 30px; background-color:burlywood; text-decoration: none; color: rgb(90, 90, 90); font-weight: bold; border: 1px solid grey;">Login</a>
+    <a href="{{ route('login') }}" style="padding: 10px 30px 10px 30px; background-color: white; text-decoration: none; color: rgb(90, 90, 90); font-weight: bold; border: 1px solid rgb(17, 0, 255);">Login</a>
     <h1>Coming Soon!</h1>
     <p>We are working hard to give you a better experience. Stay tuned for something amazing!</p>
     <div class="timer" id="countdown">00:00:00:00</div>

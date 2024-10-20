@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') Dashboard @endsection
 @section('style')
 <style>
   /* width */
