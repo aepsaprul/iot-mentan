@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Okt 2024 pada 11.33
+-- Waktu pembuatan: 22 Okt 2024 pada 00.56
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -31,6 +31,7 @@ CREATE TABLE `eksportirs` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `provinsi_id` int(11) DEFAULT NULL,
   `kabupaten_id` int(11) DEFAULT NULL,
@@ -38,14 +39,6 @@ CREATE TABLE `eksportirs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `eksportirs`
---
-
-INSERT INTO `eksportirs` (`id`, `nama`, `telepon`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
-(1, 'Eksportir Satu', NULL, NULL, NULL, NULL, NULL, '2024-10-20 18:11:23', '2024-10-20 18:11:23'),
-(2, 'Eksportir Dua', NULL, NULL, NULL, NULL, NULL, '2024-10-20 18:11:32', '2024-10-20 18:11:32');
 
 -- --------------------------------------------------------
 
@@ -107,6 +100,7 @@ CREATE TABLE `pedagang_besars` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `provinsi_id` int(11) DEFAULT NULL,
   `kabupaten_id` int(11) DEFAULT NULL,
@@ -114,16 +108,6 @@ CREATE TABLE `pedagang_besars` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pedagang_besars`
---
-
-INSERT INTO `pedagang_besars` (`id`, `nama`, `telepon`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
-(1, 'Pedagang Satu', NULL, NULL, NULL, NULL, NULL, '2024-10-20 18:05:08', '2024-10-20 18:05:08'),
-(2, 'Pedagang Dua', NULL, NULL, NULL, NULL, NULL, '2024-10-20 18:05:16', '2024-10-20 18:05:16'),
-(4, 'Pedagang Tiga', NULL, NULL, NULL, NULL, NULL, '2024-10-20 18:05:59', '2024-10-20 18:05:59'),
-(5, 'ae', '09878987', 'esdfd', 31, 3171, 317101, '2024-10-21 02:28:47', '2024-10-21 02:28:47');
 
 -- --------------------------------------------------------
 
@@ -135,6 +119,7 @@ CREATE TABLE `pengepuls` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `provinsi_id` int(11) DEFAULT NULL,
   `kabupaten_id` int(11) DEFAULT NULL,
@@ -142,16 +127,6 @@ CREATE TABLE `pengepuls` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pengepuls`
---
-
-INSERT INTO `pengepuls` (`id`, `nama`, `telepon`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
-(1, 'Pengepul Satu', NULL, NULL, NULL, NULL, NULL, '2024-10-20 16:00:07', '2024-10-20 16:00:07'),
-(2, 'Pengepul Dua', NULL, NULL, NULL, NULL, NULL, '2024-10-20 16:00:15', '2024-10-20 16:00:23'),
-(4, 'Pengepul Tiga', NULL, NULL, NULL, NULL, NULL, '2024-10-20 17:57:39', '2024-10-20 17:57:39'),
-(5, 'tes', '09878987', 'tes', 33, 3302, 330202, '2024-10-21 01:46:43', '2024-10-21 01:46:43');
 
 -- --------------------------------------------------------
 
@@ -182,6 +157,7 @@ CREATE TABLE `petanis` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `provinsi_id` int(11) DEFAULT NULL,
   `kabupaten_id` int(11) DEFAULT NULL,
@@ -194,11 +170,8 @@ CREATE TABLE `petanis` (
 -- Dumping data untuk tabel `petanis`
 --
 
-INSERT INTO `petanis` (`id`, `nama`, `telepon`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
-(2, 'Petani Satu', NULL, NULL, NULL, NULL, NULL, '2024-10-20 15:52:06', '2024-10-20 15:52:06'),
-(3, 'Petani Dua', NULL, NULL, NULL, NULL, NULL, '2024-10-20 15:52:17', '2024-10-20 15:52:17'),
-(4, 'Petani Tiga', NULL, NULL, NULL, NULL, NULL, '2024-10-20 15:52:28', '2024-10-20 15:52:28'),
-(5, 'tes', '09878987', 'tes', 33, 3305, 330502, '2024-10-21 00:26:04', '2024-10-21 00:26:04');
+INSERT INTO `petanis` (`id`, `nama`, `telepon`, `email`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
+(1, 'Petani Satu', '081111111', 'petanisatu@email.com', 'alamat petani satu', 32, 3201, 320106, '2024-10-21 15:35:35', '2024-10-21 15:35:35');
 
 -- --------------------------------------------------------
 
@@ -8121,10 +8094,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `password_show`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$R5QVyZgsVV.uYaI77uZXi.cJcU.177gmOciIlp125O5ZkJhT56Ttm', '12345678', 'admin', NULL, '2024-10-15 03:05:16', '2024-10-15 03:05:16'),
-(2, 'tes', 'emailsatu@gmail.com', NULL, '$2y$12$LT/mhC0wN7l2Xj4UouPTEucQxA3XZ3sD0LZn2vWoNvw652E93JLfK', '12345678', 'admin', NULL, '2024-10-21 00:26:04', '2024-10-21 00:26:04'),
-(3, 'tes', 'emaildua@gmail.com', NULL, '$2y$12$13BeF9RoHEVZC.LVcw..5e2V/JBBEpgjGkUuepH0czQlVrgXRIzku', '12345678', 'admin', NULL, '2024-10-21 01:46:43', '2024-10-21 01:46:43'),
-(4, 'ae', 'emails@gmail.com', NULL, '$2y$12$nHQ9926FaUC8O7VgBjazru2cMWV4Es3u0AajleRVcVvMBaKoUwvna', '12345', 'admin', NULL, '2024-10-21 02:28:47', '2024-10-21 02:28:47');
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$juYtP9mFM89mIrlCqjyTg.BDNpE7LGGC/6auVWBL1Qrv2Wh09qzdG', '123456789', NULL, NULL, NULL, '2024-10-21 15:14:35'),
+(2, 'Petani Satu', 'petanisatu@email.com', NULL, '$2y$12$oIVtDL5j2oIpBmKavZJSzO.MI42y3UbRNcNjJL6waWisFhjDLv2cC', '12345', 'petani', NULL, '2024-10-21 15:35:35', '2024-10-21 15:35:35');
 
 --
 -- Indexes for dumped tables
@@ -8223,7 +8194,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `eksportirs`
 --
 ALTER TABLE `eksportirs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -8241,13 +8212,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pedagang_besars`
 --
 ALTER TABLE `pedagang_besars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengepuls`
 --
 ALTER TABLE `pengepuls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -8259,13 +8230,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `petanis`
 --
 ALTER TABLE `petanis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

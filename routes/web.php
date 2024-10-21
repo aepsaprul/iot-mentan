@@ -41,34 +41,34 @@ Route::middleware(['auth'])->group(function () {
   Route::post('login/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
   // petani
-  Route::get('petani', [PetaniController::class, 'index'])->name('petani')->middleware('auth');
-  Route::get('petani/create', [PetaniController::class, 'create'])->name('petani.create')->middleware('auth');
-  Route::post('petani/store', [PetaniController::class, 'store'])->name('petani.store')->middleware('auth');
-  Route::get('petani/{id}/edit', [PetaniController::class, 'edit'])->name('petani.edit')->middleware('auth');
-  Route::put('petani/{id}/update', [PetaniController::class, 'update'])->name('petani.update')->middleware('auth');
-  Route::get('petani/{id}/delete', [PetaniController::class, 'delete'])->name('petani.delete')->middleware('auth');
+  Route::get('pengguna/petani', [PetaniController::class, 'index'])->name('petani')->middleware('auth');
+  Route::get('pengguna/petani/create', [PetaniController::class, 'create'])->name('petani.create')->middleware('auth');
+  Route::post('pengguna/petani/store', [PetaniController::class, 'store'])->name('petani.store')->middleware('auth');
+  Route::get('pengguna/petani/{id}/edit', [PetaniController::class, 'edit'])->name('petani.edit')->middleware('auth');
+  Route::put('pengguna/petani/{id}/update', [PetaniController::class, 'update'])->name('petani.update')->middleware('auth');
+  Route::get('pengguna/petani/{id}/delete', [PetaniController::class, 'delete'])->name('petani.delete')->middleware('auth');
 
   // pengepul
-  Route::get('pengepul', [PengepulController::class, 'index'])->name('pengepul')->middleware('auth');
-  Route::get('pengepul/create', [PengepulController::class, 'create'])->name('pengepul.create')->middleware('auth');
-  Route::post('pengepul/store', [PengepulController::class, 'store'])->name('pengepul.store')->middleware('auth');
-  Route::get('pengepul/{id}/edit', [PengepulController::class, 'edit'])->name('pengepul.edit')->middleware('auth');
-  Route::put('pengepul/{id}/update', [PengepulController::class, 'update'])->name('pengepul.update')->middleware('auth');
-  Route::get('pengepul/{id}/delete', [PengepulController::class, 'delete'])->name('pengepul.delete')->middleware('auth');
+  Route::get('pengguna/pengepul', [PengepulController::class, 'index'])->name('pengepul')->middleware('auth');
+  Route::get('pengguna/pengepul/create', [PengepulController::class, 'create'])->name('pengepul.create')->middleware('auth');
+  Route::post('pengguna/pengepul/store', [PengepulController::class, 'store'])->name('pengepul.store')->middleware('auth');
+  Route::get('pengguna/pengepul/{id}/edit', [PengepulController::class, 'edit'])->name('pengepul.edit')->middleware('auth');
+  Route::put('pengguna/pengepul/{id}/update', [PengepulController::class, 'update'])->name('pengepul.update')->middleware('auth');
+  Route::get('pengguna/pengepul/{id}/delete', [PengepulController::class, 'delete'])->name('pengepul.delete')->middleware('auth');
 
   // pedagang_besar
-  Route::get('pedagang_besar', [PedagangBesarController::class, 'index'])->name('pedagang_besar')->middleware('auth');
-  Route::get('pedagang_besar/create', [PedagangBesarController::class, 'create'])->name('pedagang_besar.create')->middleware('auth');
-  Route::post('pedagang_besar/store', [PedagangBesarController::class, 'store'])->name('pedagang_besar.store')->middleware('auth');
-  Route::get('pedagang_besar/{id}/edit', [PedagangBesarController::class, 'edit'])->name('pedagang_besar.edit')->middleware('auth');
-  Route::put('pedagang_besar/{id}/update', [PedagangBesarController::class, 'update'])->name('pedagang_besar.update')->middleware('auth');
-  Route::get('pedagang_besar/{id}/delete', [PedagangBesarController::class, 'delete'])->name('pedagang_besar.delete')->middleware('auth');
+  Route::get('pengguna/pedagang_besar', [PedagangBesarController::class, 'index'])->name('pedagang_besar')->middleware('auth');
+  Route::get('pengguna/pedagang_besar/create', [PedagangBesarController::class, 'create'])->name('pedagang_besar.create')->middleware('auth');
+  Route::post('pengguna/pedagang_besar/store', [PedagangBesarController::class, 'store'])->name('pedagang_besar.store')->middleware('auth');
+  Route::get('pengguna/pedagang_besar/{id}/edit', [PedagangBesarController::class, 'edit'])->name('pedagang_besar.edit')->middleware('auth');
+  Route::put('pengguna/pedagang_besar/{id}/update', [PedagangBesarController::class, 'update'])->name('pedagang_besar.update')->middleware('auth');
+  Route::get('pengguna/pedagang_besar/{id}/delete', [PedagangBesarController::class, 'delete'])->name('pedagang_besar.delete')->middleware('auth');
 
   // eksportir
-  Route::get('eksportir', [EksportirController::class, 'index'])->name('eksportir')->middleware('auth');
-  Route::get('eksportir/create', [EksportirController::class, 'create'])->name('eksportir.create')->middleware('auth');
-  Route::post('eksportir/store', [EksportirController::class, 'store'])->name('eksportir.store')->middleware('auth');
-  Route::get('eksportir/{id}/edit', [EksportirController::class, 'edit'])->name('eksportir.edit')->middleware('auth');
-  Route::put('eksportir/{id}/update', [EksportirController::class, 'update'])->name('eksportir.update')->middleware('auth');
-  Route::get('eksportir/{id}/delete', [EksportirController::class, 'delete'])->name('eksportir.delete')->middleware('auth');
+  Route::get('pengguna/eksportir', [EksportirController::class, 'index'])->name('eksportir')->middleware('auth');
+  Route::get('pengguna/eksportir/create', [EksportirController::class, 'create'])->name('eksportir.create')->middleware('auth');
+  Route::post('pengguna/eksportir/store', [EksportirController::class, 'store'])->name('eksportir.store')->middleware('auth');
+  Route::get('pengguna/eksportir/{id}/edit', [EksportirController::class, 'edit'])->name('eksportir.edit')->middleware('auth');
+  Route::put('pengguna/eksportir/{id}/update', [EksportirController::class, 'update'])->name('eksportir.update')->middleware('auth');
+  Route::get('pengguna/eksportir/{id}/delete', [EksportirController::class, 'delete'])->name('eksportir.delete')->middleware('auth');
 });

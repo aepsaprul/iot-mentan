@@ -64,15 +64,15 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('home') }}" class="nav-link">
+            <a href="{{ route('home') }}" class="nav-link {{ Request::is('home*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::is('pengguna*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('pengguna*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pengguna
@@ -81,25 +81,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('petani') }}" class="nav-link">
+                <a href="{{ route('petani') }}" class="nav-link {{ Request::is('pengguna/petani*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Petani</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('pengepul') }}" class="nav-link">
+                <a href="{{ route('pengepul') }}" class="nav-link {{ Request::is('pengguna/pengepul*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Pengepul</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('pedagang_besar') }}" class="nav-link">
+                <a href="{{ route('pedagang_besar') }}" class="nav-link {{ Request::is('pengguna/pedagang_besar*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Pedagang Besar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('eksportir') }}" class="nav-link">
+                <a href="{{ route('eksportir') }}" class="nav-link {{ Request::is('pengguna/eksportir*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Eksportir</p>
                 </a>
