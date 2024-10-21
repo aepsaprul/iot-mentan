@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EksportirController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PedagangBesarController;
 use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\PengepulController;
 
@@ -49,4 +51,20 @@ Route::middleware(['auth'])->group(function () {
   Route::get('pengepul/{id}/edit', [PengepulController::class, 'edit'])->name('pengepul.edit')->middleware('auth');
   Route::put('pengepul/{id}/update', [PengepulController::class, 'update'])->name('pengepul.update')->middleware('auth');
   Route::get('pengepul/{id}/delete', [PengepulController::class, 'delete'])->name('pengepul.delete')->middleware('auth');
+
+  // pedagang_besar
+  Route::get('pedagang_besar', [PedagangBesarController::class, 'index'])->name('pedagang_besar')->middleware('auth');
+  Route::get('pedagang_besar/create', [PedagangBesarController::class, 'create'])->name('pedagang_besar.create')->middleware('auth');
+  Route::post('pedagang_besar/store', [PedagangBesarController::class, 'store'])->name('pedagang_besar.store')->middleware('auth');
+  Route::get('pedagang_besar/{id}/edit', [PedagangBesarController::class, 'edit'])->name('pedagang_besar.edit')->middleware('auth');
+  Route::put('pedagang_besar/{id}/update', [PedagangBesarController::class, 'update'])->name('pedagang_besar.update')->middleware('auth');
+  Route::get('pedagang_besar/{id}/delete', [PedagangBesarController::class, 'delete'])->name('pedagang_besar.delete')->middleware('auth');
+
+  // eksportir
+  Route::get('eksportir', [EksportirController::class, 'index'])->name('eksportir')->middleware('auth');
+  Route::get('eksportir/create', [EksportirController::class, 'create'])->name('eksportir.create')->middleware('auth');
+  Route::post('eksportir/store', [EksportirController::class, 'store'])->name('eksportir.store')->middleware('auth');
+  Route::get('eksportir/{id}/edit', [EksportirController::class, 'edit'])->name('eksportir.edit')->middleware('auth');
+  Route::put('eksportir/{id}/update', [EksportirController::class, 'update'])->name('eksportir.update')->middleware('auth');
+  Route::get('eksportir/{id}/delete', [EksportirController::class, 'delete'])->name('eksportir.delete')->middleware('auth');
 });

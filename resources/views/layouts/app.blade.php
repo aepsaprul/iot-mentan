@@ -75,7 +75,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Manajemen Pengguna
+                Pengguna
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -93,13 +93,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('pedagang_besar') }}" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Pedagang Besar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('eksportir') }}" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Eksportir</p>
                 </a>
@@ -157,7 +157,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-box"></i>
               <p>
-                Data Supply Chain
+                Supply Chain
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
