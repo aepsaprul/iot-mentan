@@ -34,6 +34,8 @@ Route::post('register/store', [LoginController::class, 'registerStore'])->name('
 Route::middleware(['auth'])->group(function () {
   // home
   Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+  Route::get('home/{id}/akun', [HomeController::class, 'akun'])->name('home.akun')->middleware('auth');
+  Route::put('home/{id}/akun_update', [HomeController::class, 'akunUpdate'])->name('home.akun_update')->middleware('auth');
 
   // logout
   Route::post('login/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');

@@ -27,21 +27,34 @@
 
       <form action="{{ route('login.auth') }}" method="post">
         @csrf
-        <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email" autofocus>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+        @if ($errors->has('gagal'))
+          <span class="text-danger text-sm font-italic">{{ $errors->first('gagal') }}</span>
+        @endif
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" autofocus>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
             </div>
           </div>
+          @error('email')
+            <span class="text-danger text-sm font-italic">{{ $message }}</span>
+          @enderror
         </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
             </div>
           </div>
+          @error('password')
+            <span class="text-danger text-sm font-italic">{{ $message }}</span>
+          @enderror
         </div>
         <div class="row mb-lg-3">
           <div class="col-8">

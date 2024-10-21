@@ -28,6 +28,9 @@ class LoginController extends Controller
     $credentials = $request->validate([
       'email' => ['required', 'email'],
       'password' => ['required'],
+    ], [
+      'email.required' => 'Email harus diisi.',
+      'password.required' => 'Password harus diisi.'
     ]);
 
     $email = $request->email;
@@ -41,7 +44,7 @@ class LoginController extends Controller
     }    
 
     return back()->withErrors([
-      'gagal' => 'Email / Passwors salah'
+      'gagal' => 'Email / Password salah'
     ]);
   }
   public function logout(Request $request)
@@ -115,7 +118,7 @@ class LoginController extends Controller
     $user->email = $request->email;
     $user->password = Hash::make($request->password);
     $user->password_show = $request->password;
-    $user->level = "admin";
+    $user->level = $jenis;
     $user->save();
 
     if ($jenis == "petani") {
@@ -130,6 +133,7 @@ class LoginController extends Controller
     
     $pengguna->nama = $request->nama;
     $pengguna->telepon = $request->telepon;
+    $pengguna->email = $request->email;
     $pengguna->alamat = $request->alamat;
     $pengguna->provinsi_id = $request->provinsi_id;
     $pengguna->kabupaten_id = $request->kabupaten_id;

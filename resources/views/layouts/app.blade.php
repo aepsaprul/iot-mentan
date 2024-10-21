@@ -34,7 +34,7 @@
           <span class="text-uppercase">{{ Auth::user()->name }}</span> <i class="fas fa-caret-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a href="#" class="dropdown-item mr-2">
+          <a href="{{ route('home.akun', [Auth::user()->id]) }}" class="dropdown-item mr-2">
             <i class="fas fa-key px-2"></i> Ubah Password
           </a>
           <div class="dropdown-divider"></div>
