@@ -39,7 +39,12 @@
 </head>
 <body>
   <div class="container">
-    <a href="{{ route('login') }}" style="padding: 10px 30px 10px 30px; background-color: white; text-decoration: none; color: rgb(90, 90, 90); font-weight: bold; border: 1px solid rgb(17, 0, 255);">Login</a>
+    <div style="display: flex; justify-content: center;">
+      <div style="display: flex; justify-content: space-between; width: 300px;">
+        <a href="{{ route('login') }}" style="text-decoration: none; background-color: #ffffff; padding: 10px 20px; text-align: center; flex: 1; margin: 5px; border-radius: 5px 5px 0 0; border-bottom: 4px solid #eeff00;">Login</a>
+        <a href="{{ route('register') }}" style="text-decoration: none; background-color: #ffffff; padding: 10px 20px; text-align: center; flex: 1; margin: 5px; border-radius: 5px 5px 0 0; border-bottom: 4px solid #00ff37;">Register</a>
+      </div>
+    </div>
     <h1>Coming Soon!</h1>
     <p>We are working hard to give you a better experience. Stay tuned for something amazing!</p>
     <div class="timer" id="countdown">00:00:00:00</div>

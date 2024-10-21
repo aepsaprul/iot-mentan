@@ -27,6 +27,8 @@ Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login/auth', [LoginController::class, 'authenticate'])->name('login.auth');
 
 Route::get('register', [LoginController::class, 'register'])->name('register');
+Route::get('register/{id}/get_kabupaten', [LoginController::class, 'getKabupaten'])->name('register.get.kabupaten');
+Route::get('register/{id}/get_kecamatan', [LoginController::class, 'getKecamatan'])->name('register.get.kecamatan');
 Route::post('register/store', [LoginController::class, 'registerStore'])->name('register.store');
 
 Route::middleware(['auth'])->group(function () {
