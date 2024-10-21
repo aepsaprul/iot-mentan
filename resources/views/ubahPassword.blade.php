@@ -30,18 +30,20 @@
                 <div class="form-group row">
                   <label for="email" class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ $user->email }}" placeholder="Email" autofocus>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ $user->email }}" placeholder="Email" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="password" class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" name="password" id="password" value="{{ $user->password_show }}" placeholder="Password">
+                    <input type="text" class="form-control" name="password" id="password" value="{{ $user->password_show }}" placeholder="Password" autofocus >
                   </div>
+                  @error('password')
+                    <span class="text-danger text-sm font-italic">{{ $message }}</span>
+                  @enderror
                 </div>
                 <div class="row mt-3">
                   <div class="col-12 text-right">
-                    <a href="{{ route('home') }}" class="btn btn-outline-secondary" style="width: 130px;">Batal</a>
                     <button type="submit" class="btn btn-primary" style="width: 130px;"><i class="fas fa-save"></i> Simpan</button>
                   </div>
                 </div>

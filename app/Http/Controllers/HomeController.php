@@ -28,28 +28,12 @@ class HomeController extends Controller
   public function akunUpdate(Request $request, $id)
   {
     $request->validate([
-      'email' => 'required|email|unique:users'
+      'password' => 'required'
     ], [
-      'email.unique' => 'Email sudah digunakan.'
+      'password.required' => 'Password harus diisi.'
     ]);
 
     $user = User::find($id);
-
-    if (Auth::user()->level == "petani") {
-      $pengguna = Petani::where('email', $user->email)->first();
-    } elseif (Auth::user()->level == "pengepul") {
-      $pengguna = Pengepul::where('email', $user->email)->first();
-    } elseif (Auth::user()->level == "pedagang_besar") {
-      $pengguna = PedagangBesar::where('email', $user->email)->first();
-    } else {
-      $pengguna = Eksportir::where('email', $user->email)->first();
-    }
-    
-    $pengguna->email = $request->email;
-    $pengguna->save();
-
-    
-    $user->email = $request->email;
     $user->password = Hash::make($request->password);
     $user->password_show = $request->password;
     $user->save();
