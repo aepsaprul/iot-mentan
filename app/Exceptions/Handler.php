@@ -27,4 +27,16 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+      // Cek apakah status code 419 (Page Expired)
+      if ($exception instanceof HttpException && $exception->getStatusCode() == 419) {
+        // Redirect ke halaman login dengan pesan
+        return redirect()->route('login')->with('message', 'Session expired, please log in again.');
+      }
+
+      // Kembalikan ke parent untuk exception lain
+      return parent::render($request, $exception);
+    }
 }
