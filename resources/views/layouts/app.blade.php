@@ -116,13 +116,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="{{ route('transaksi.petani') }}" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Transaksi Panen Petani</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('transaksi.pengepul') }}" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Transaksi Ke Pengepul</p>
                 </a>
