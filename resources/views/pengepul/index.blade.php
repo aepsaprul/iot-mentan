@@ -31,6 +31,9 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
+            <div class="card-header">
+              <a href="{{ route('pengepul.create') }}" class="btn btn-sm btn-primary" style="width: 130px;"><i class="fas fa-plus"></i> Tambah</a>
+            </div>
             <div class="card-body">
               @if (session('message'))
                 <div class="alert alert-success alert-dismissible">
@@ -43,6 +46,7 @@
                   <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
+                    <th class="text-center">Email</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
@@ -51,11 +55,14 @@
                     <tr>
                       <td class="text-center p-1">{{ $key + 1 }}</td>
                       <td class="p-1">{{ $pengepul->nama }}</td>
+                      <td class="p-1">{{ $pengepul->email }}</td>
                       <td class="text-center p-1">
                         <div class="btn-group">
                           <i class="fas fa-cog dropdown-toggle text-primary" data-toggle="dropdown"></i>
                           <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="{{ route('pengepul.edit', [$pengepul->id]) }}" class="dropdown-item"><i class="fas fa-pencil-alt" style="width: 25px;"></i> Ubah</a></li>
+                            <li><a href="{{ route('pengepul.permission', [$pengepul->id]) }}" class="dropdown-item"><i class="fas fa-key" style="width: 25px;"></i> Permission</a></li>
+                            <li><a href="{{ route('pengepul.akun', [$pengepul->id]) }}" class="dropdown-item"><i class="fas fa-lock" style="width: 25px;"></i> Akun</a></li>
                             <li><a href="{{ route('pengepul.delete', [$pengepul->id]) }}" class="dropdown-item" onclick="return confirm('Yakin akan dihapus?')"><i class="fas fa-trash-alt" style="width: 25px;"></i> Hapus</a></li>
                           </ul>
                         </div>

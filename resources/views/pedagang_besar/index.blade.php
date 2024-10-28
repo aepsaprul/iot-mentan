@@ -31,6 +31,9 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
+            <div class="card-header">
+              <a href="{{ route('pedagang_besar.create') }}" class="btn btn-sm btn-primary" style="width: 130px;"><i class="fas fa-plus"></i> Tambah</a>
+            </div>
             <div class="card-body">
               @if (session('message'))
                 <div class="alert alert-success alert-dismissible">

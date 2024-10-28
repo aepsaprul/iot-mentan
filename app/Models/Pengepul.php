@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengepul extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public function dataUser() {
+    return $this->hasOne(User::class, 'id', 'user_id');
+  }
 }

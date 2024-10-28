@@ -122,12 +122,16 @@ class LoginController extends Controller
     $user->save();
 
     if ($jenis == "petani") {
+      $user->assignRole('petani');
       $pengguna = new Petani;
     } elseif ($jenis == "pengepul") {
+      $user->assignRole('pengepul');
       $pengguna = new Pengepul;
     } elseif ($jenis == "pedagang_besar") {
+      $user->assignRole('pedagang');
       $pengguna = new PedagangBesar;
     } else {
+      $user->assignRole('pengepul');
       $pengguna = new Eksportir;
     }
     

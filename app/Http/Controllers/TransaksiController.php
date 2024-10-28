@@ -7,6 +7,7 @@ use App\Models\Petani;
 use App\Models\TransaksiPengepul;
 use App\Models\TransaksiPetani;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
@@ -59,7 +60,12 @@ class TransaksiController extends Controller
 
   public function pengepulCreate()
   {
-    $pengepul = Pengepul::get();
+    if (auth()->user()->hasRole('adm')) {
+      $pengepul = Pengepul::get();
+    } else {
+      $pengepul = Pengepul::where('email', Auth::user()->email)->first();
+    }
+    dd($pengepul);
     $petanis = Petani::get();
 
     return view('transaksi.pengepul.create', ['petanis' => $petanis]);

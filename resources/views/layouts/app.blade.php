@@ -71,6 +71,23 @@
               </p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('adm*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('adm*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                Adm
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('permission') }}" class="nav-link {{ Request::is('adm/permission*') ? 'active' : '' }}">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Pemission</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item {{ Request::is('pengguna*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ Request::is('pengguna*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
@@ -106,8 +123,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::is('transaksi*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Transaksi
@@ -116,13 +133,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('transaksi.petani') }}" class="nav-link">
+                <a href="{{ route('transaksi.petani') }}" class="nav-link {{ Request::is('transaksi/petani*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Transaksi Panen Petani</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('transaksi.pengepul') }}" class="nav-link">
+                <a href="{{ route('transaksi.pengepul') }}" class="nav-link {{ Request::is('transaksi/pengepul*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Transaksi Ke Pengepul</p>
                 </a>
