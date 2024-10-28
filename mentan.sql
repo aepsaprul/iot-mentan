@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Okt 2024 pada 00.56
+-- Waktu pembuatan: 28 Okt 2024 pada 09.42
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `eksportirs` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -76,7 +77,42 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2024_10_27_191638_create_permission_tables', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 1),
+(1, 'App\\Models\\User', 14),
+(3, 'App\\Models\\User', 2),
+(3, 'App\\Models\\User', 3);
 
 -- --------------------------------------------------------
 
@@ -98,6 +134,36 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `pedagang_besars` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `nama` varchar(50) DEFAULT NULL,
+  `telepon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `alamat` varchar(100) DEFAULT NULL,
+  `provinsi_id` int(11) DEFAULT NULL,
+  `kabupaten_id` int(11) DEFAULT NULL,
+  `kecamatan_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pedagang_besars`
+--
+
+INSERT INTO `pedagang_besars` (`id`, `user_id`, `nama`, `telepon`, `email`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
+(1, 0, 'Pedagang Satu', '0987898731', 'pedagang1@email.com', 'Jl Pahlawan', 33, 3303, 330301, '2024-10-21 21:28:30', '2024-10-21 21:28:30'),
+(2, 0, 'Pedagang Dua', '0987898732', 'pedagang2@email.com', 'Jl Pahlawan', 33, 3303, 330302, '2024-10-21 21:28:46', '2024-10-21 21:28:46'),
+(3, 0, 'Pedagang Tiga', '0987898733', 'pedagang3@email.com', 'Jl Pahlawan', 33, 3303, 330303, '2024-10-21 21:29:04', '2024-10-21 21:29:04');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengepuls`
+--
+
+CREATE TABLE `pengepuls` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -112,21 +178,52 @@ CREATE TABLE `pedagang_besars` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengepuls`
+-- Struktur dari tabel `permissions`
 --
 
-CREATE TABLE `pengepuls` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `telepon` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `provinsi_id` int(11) DEFAULT NULL,
-  `kabupaten_id` int(11) DEFAULT NULL,
-  `kecamatan_id` int(11) DEFAULT NULL,
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `menu` varchar(25) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(25) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `menu`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'dashboard', 'dashboard', 'web', '2024-10-27 13:08:13', '2024-10-27 13:08:13'),
+(2, 'adm', 'adm', 'web', '2024-10-27 13:08:49', '2024-10-27 13:08:49'),
+(3, 'petani', 'petani', 'web', '2024-10-27 13:09:17', '2024-10-27 13:09:17'),
+(4, 'petani', 'petani-tambah', 'web', '2024-10-27 13:10:01', '2024-10-27 13:10:01'),
+(5, 'petani', 'petani-ubah', 'web', '2024-10-27 13:10:16', '2024-10-27 13:10:16'),
+(6, 'petani', 'petani-hapus', 'web', '2024-10-27 13:10:26', '2024-10-27 13:10:26'),
+(7, 'pengepul', 'pengepul', 'web', '2024-10-27 13:11:14', '2024-10-27 13:11:14'),
+(8, 'pengepul', 'pengepul-tambah', 'web', '2024-10-27 13:11:25', '2024-10-27 13:11:25'),
+(9, 'pengepul', 'pengepul-ubah', 'web', '2024-10-27 13:11:34', '2024-10-27 13:11:34'),
+(10, 'pengepul', 'pengepul-hapus', 'web', '2024-10-27 13:11:48', '2024-10-27 13:11:48'),
+(11, 'pedagang', 'pedagang', 'web', '2024-10-27 13:12:18', '2024-10-27 13:12:18'),
+(12, 'pedagang', 'pedagang-tambah', 'web', '2024-10-27 13:14:00', '2024-10-27 13:14:00'),
+(13, 'pedagang', 'pedagang-ubah', 'web', '2024-10-27 13:14:11', '2024-10-27 13:14:11'),
+(14, 'pedagang', 'pedagang-hapus', 'web', '2024-10-27 13:14:20', '2024-10-27 13:14:20'),
+(15, 'eksportir', 'eksportir', 'web', '2024-10-27 13:14:51', '2024-10-27 13:15:19'),
+(16, 'eksportir', 'eksportir-tambah', 'web', '2024-10-27 13:15:35', '2024-10-27 13:15:35'),
+(17, 'eksportir', 'eksportir-ubah', 'web', '2024-10-27 13:15:45', '2024-10-27 13:15:45'),
+(18, 'eksportir', 'eksportir-hapus', 'web', '2024-10-27 13:15:58', '2024-10-27 13:15:58'),
+(19, 'transaksi petani', 'transaksi-petani', 'web', '2024-10-27 13:23:53', '2024-10-27 13:23:53'),
+(20, 'transaksi petani', 'transaksi-petani-create', 'web', '2024-10-27 13:24:10', '2024-10-27 13:24:10'),
+(21, 'transaksi pengepul', 'transaksi-pengepul', 'web', '2024-10-27 13:24:29', '2024-10-27 13:24:29'),
+(22, 'transaksi pengepul', 'transaksi-pengepul-create', 'web', '2024-10-27 13:24:51', '2024-10-27 13:24:51'),
+(23, 'transaksi pedagang', 'transaksi-pedagang', 'web', '2024-10-27 13:25:25', '2024-10-27 13:25:25'),
+(24, 'transaksi pedagang', 'transaksi-pedagang-create', 'web', '2024-10-27 13:25:41', '2024-10-27 13:25:41'),
+(25, 'transaksi eksportir', 'transaksi-eksportir', 'web', '2024-10-27 13:26:01', '2024-10-27 13:26:01'),
+(26, 'transaksi eksportir', 'transaksi-eksportir-create', 'web', '2024-10-27 13:26:17', '2024-10-27 13:26:17'),
+(27, 'upload dokumen coa', 'upload-dokumen-coa', 'web', '2024-10-27 13:28:06', '2024-10-27 13:28:06'),
+(28, 'pengepul', 'pengepul-akun', 'web', '2024-10-27 21:08:59', '2024-10-27 21:08:59'),
+(29, 'pengepul', 'pengepul-permission', 'web', '2024-10-27 21:10:13', '2024-10-27 21:10:13');
 
 -- --------------------------------------------------------
 
@@ -155,6 +252,7 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `petanis` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -162,16 +260,12 @@ CREATE TABLE `petanis` (
   `provinsi_id` int(11) DEFAULT NULL,
   `kabupaten_id` int(11) DEFAULT NULL,
   `kecamatan_id` int(11) DEFAULT NULL,
+  `luas_lahan` int(11) DEFAULT NULL COMMENT 'per meter',
+  `komoditas` varchar(100) DEFAULT NULL,
+  `ipfs_hash` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `petanis`
---
-
-INSERT INTO `petanis` (`id`, `nama`, `telepon`, `email`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
-(1, 'Petani Satu', '081111111', 'petanisatu@email.com', 'alamat petani satu', 32, 3201, 320106, '2024-10-21 15:35:35', '2024-10-21 15:35:35');
 
 -- --------------------------------------------------------
 
@@ -8073,6 +8167,212 @@ CREATE TABLE `reg_villages` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(25) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'adm', 'web', '2024-10-27 12:46:09', '2024-10-27 12:46:09'),
+(2, 'petani', 'web', '2024-10-27 15:22:23', '2024-10-27 15:22:23'),
+(3, 'pengepul', 'web', '2024-10-27 15:22:59', '2024-10-27 15:22:59'),
+(4, 'pedagang', 'web', '2024-10-27 15:23:06', '2024-10-27 15:23:06'),
+(5, 'eksportir', 'web', '2024-10-27 15:23:13', '2024-10-27 15:23:13');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 1),
+(21, 3),
+(22, 1),
+(22, 3),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 1),
+(28, 1),
+(29, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_eksportirs`
+--
+
+CREATE TABLE `transaksi_eksportirs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tanggal_pembelian` timestamp NULL DEFAULT NULL,
+  `nama_penjual` varchar(50) NOT NULL,
+  `jumlah_produk_berdasarkan_mutu` int(11) NOT NULL COMMENT 'kg',
+  `kadar_air_produk` int(11) NOT NULL COMMENT 'ph',
+  `perlakuan` varchar(50) NOT NULL,
+  `metode_pengeringan` varchar(50) NOT NULL,
+  `tanggal_mulai_pengeringan` timestamp NULL DEFAULT NULL,
+  `tanggal_selesai_pengeringan` timestamp NULL DEFAULT NULL,
+  `kadar_air` int(11) NOT NULL,
+  `kondisi_penyimpanan` varchar(50) NOT NULL,
+  `bahan_pengemas` varchar(50) NOT NULL,
+  `no_sertifikat_coa` varchar(50) NOT NULL,
+  `tanggal_expor` timestamp NULL DEFAULT NULL,
+  `nama_importir` varchar(50) DEFAULT NULL,
+  `alamat_importir` varchar(100) NOT NULL,
+  `ipfs_hash` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_pedagangs`
+--
+
+CREATE TABLE `transaksi_pedagangs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tanggal_pembelian` timestamp NULL DEFAULT NULL,
+  `nama_penjual` varchar(50) NOT NULL,
+  `jumlah_produk_berdasarkan_mutu` int(11) NOT NULL COMMENT 'kg',
+  `kadar_air_produk` int(11) NOT NULL COMMENT 'ph',
+  `perlakuan` varchar(20) NOT NULL,
+  `metode_pengeringan` varchar(20) NOT NULL,
+  `tanggal_mulai_pengeringan` timestamp NULL DEFAULT NULL,
+  `tanggal_selesai_pengeringan` timestamp NULL DEFAULT NULL,
+  `kadar_air` int(11) NOT NULL,
+  `kondisi_penyimpanan` varchar(20) NOT NULL,
+  `bahan_pengemas` varchar(20) NOT NULL,
+  `tanggal_penjualan` timestamp NULL DEFAULT NULL,
+  `metode_pengiriman` varchar(50) NOT NULL,
+  `harga` double NOT NULL,
+  `nama_pembeli` varchar(50) NOT NULL,
+  `alamat_pembeli` varchar(100) NOT NULL,
+  `ipfs_hash` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_pengepuls`
+--
+
+CREATE TABLE `transaksi_pengepuls` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pengepul_id` int(11) NOT NULL,
+  `tanggal_pembelian` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `petani_id` int(11) NOT NULL,
+  `jumlah_produk_berdasarkan_mutu` int(11) NOT NULL COMMENT 'kg',
+  `kadar_air_produk` int(11) NOT NULL COMMENT 'ph',
+  `perlakuan` varchar(100) NOT NULL,
+  `metode_pengeringan` varchar(20) NOT NULL,
+  `tanggal_mulai_pengeringan` timestamp NULL DEFAULT NULL,
+  `tanggal_selesai_pengeringan` timestamp NULL DEFAULT NULL,
+  `kadar_air` int(11) NOT NULL,
+  `kondisi_penyimpanan` varchar(20) NOT NULL,
+  `bahan_pengemas` varchar(20) NOT NULL,
+  `tanggal_penjualan` date NOT NULL,
+  `metode_pengiriman` varchar(50) NOT NULL,
+  `harga` double NOT NULL,
+  `nama_pembeli` varchar(50) NOT NULL,
+  `alamat_pembeli` varchar(100) NOT NULL,
+  `ipfs_hash` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `transaksi_pengepuls`
+--
+
+INSERT INTO `transaksi_pengepuls` (`id`, `pengepul_id`, `tanggal_pembelian`, `petani_id`, `jumlah_produk_berdasarkan_mutu`, `kadar_air_produk`, `perlakuan`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `kadar_air`, `kondisi_penyimpanan`, `bahan_pengemas`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
+(1, 0, '2024-10-25 17:00:00', 1, 1, 2, 'perlakuan', 'metod pengeringan', '2024-10-26 17:00:00', '2024-10-27 17:00:00', 3, 'kondis penyimapnan', 'bahan pengemas', '2024-10-29', 'metod pengiriman', 3000, 'nama pemb', 'alamat pem', 'tes', '2024-10-26 15:16:26', '2024-10-26 15:16:26');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_petanis`
+--
+
+CREATE TABLE `transaksi_petanis` (
+  `id` int(11) NOT NULL,
+  `petani_id` int(11) NOT NULL,
+  `lokasi_kebun` varchar(100) NOT NULL,
+  `jumlah_tegakan` int(11) NOT NULL,
+  `umur_tanaman` smallint(6) NOT NULL,
+  `varietas_tanaman` varchar(100) NOT NULL,
+  `tanggal_panen` timestamp NULL DEFAULT NULL,
+  `jumlah_panen` int(11) NOT NULL,
+  `metode_pengeringan` varchar(20) NOT NULL,
+  `tanggal_mulai_pengeringan` timestamp NULL DEFAULT NULL,
+  `tanggal_selesai_pengeringan` timestamp NULL DEFAULT NULL,
+  `bobot_biji_pala_kering` smallint(6) NOT NULL,
+  `bobot_fuli_kering` smallint(6) NOT NULL,
+  `bahan_pengemas` varchar(20) NOT NULL,
+  `tempat_penyimpanan` varchar(20) NOT NULL,
+  `tanggal_penjualan` timestamp NULL DEFAULT NULL,
+  `metode_pengiriman` varchar(20) NOT NULL,
+  `harga` double NOT NULL DEFAULT 0,
+  `nama_pembeli` varchar(50) NOT NULL,
+  `alamat_pembeli` varchar(50) NOT NULL,
+  `ipfs_hash` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transaksi_petanis`
+--
+
+INSERT INTO `transaksi_petanis` (`id`, `petani_id`, `lokasi_kebun`, `jumlah_tegakan`, `umur_tanaman`, `varietas_tanaman`, `tanggal_panen`, `jumlah_panen`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `bobot_biji_pala_kering`, `bobot_fuli_kering`, `bahan_pengemas`, `tempat_penyimpanan`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
+(1, 1, 'lokasi', 1, 2, 'varietas', '2024-10-25 17:00:00', 3, 'metod pengeringa', '2024-10-26 17:00:00', '2024-10-27 17:00:00', 30, 20, 'pengemas', 'penyimpanan', '2024-10-30 17:00:00', 'meto pengiriman', 2000, 'nma pep', 'ala pem', 'tes', '2024-10-26 05:02:11', '2024-10-26 05:02:11');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `users`
 --
 
@@ -8094,8 +8394,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `password_show`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$juYtP9mFM89mIrlCqjyTg.BDNpE7LGGC/6auVWBL1Qrv2Wh09qzdG', '123456789', NULL, NULL, NULL, '2024-10-21 15:14:35'),
-(2, 'Petani Satu', 'petanisatu@email.com', NULL, '$2y$12$oIVtDL5j2oIpBmKavZJSzO.MI42y3UbRNcNjJL6waWisFhjDLv2cC', '12345', 'petani', NULL, '2024-10-21 15:35:35', '2024-10-21 15:35:35');
+(1, 'adm', 'adm@email.com', NULL, '$2y$12$nMxOwo8b1KU8oEbyQTMtQ.xJlvndu.AxgqM0TZ/eGj2P.obC6GeM2', '12345678Ab$', NULL, NULL, '2024-10-27 19:23:01', '2024-10-27 19:23:01'),
+(2, 'Pengepul Satu', 'pengepul1@email.com', NULL, '$2y$12$8I2U.qiq7y0YYWUdiY2b6eIg1jdrXM7XCraMfgVjeFNXFf1gni1BG', '12345678', NULL, NULL, '2024-10-27 20:13:04', '2024-10-27 20:13:04'),
+(3, 'Pengepul Dua', 'pengepul2@email.com', NULL, '$2y$12$653Mstvu.zbLfqxLjYNFu.CeVkm1/ifYdgRXgwmRElkuc.OOAdkjC', '12345678', NULL, NULL, '2024-10-27 20:53:31', '2024-10-27 20:53:31');
 
 --
 -- Indexes for dumped tables
@@ -8121,6 +8422,20 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indeks untuk tabel `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
 -- Indeks untuk tabel `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -8137,6 +8452,13 @@ ALTER TABLE `pedagang_besars`
 --
 ALTER TABLE `pengepuls`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
 -- Indeks untuk tabel `personal_access_tokens`
@@ -8180,6 +8502,44 @@ ALTER TABLE `reg_villages`
   ADD KEY `fk_district` (`district_id`);
 
 --
+-- Indeks untuk tabel `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indeks untuk tabel `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
+-- Indeks untuk tabel `transaksi_eksportirs`
+--
+ALTER TABLE `transaksi_eksportirs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transaksi_pedagangs`
+--
+ALTER TABLE `transaksi_pedagangs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transaksi_pengepuls`
+--
+ALTER TABLE `transaksi_pengepuls`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transaksi_petanis`
+--
+ALTER TABLE `transaksi_petanis`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -8206,19 +8566,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `pedagang_besars`
 --
 ALTER TABLE `pedagang_besars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengepuls`
 --
 ALTER TABLE `pengepuls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -8230,17 +8596,59 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `petanis`
 --
 ALTER TABLE `petanis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi_eksportirs`
+--
+ALTER TABLE `transaksi_eksportirs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi_pedagangs`
+--
+ALTER TABLE `transaksi_pedagangs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi_pengepuls`
+--
+ALTER TABLE `transaksi_pengepuls`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi_petanis`
+--
+ALTER TABLE `transaksi_petanis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `reg_districts`
@@ -8259,6 +8667,13 @@ ALTER TABLE `reg_regencies`
 --
 ALTER TABLE `reg_villages`
   ADD CONSTRAINT `fk_district` FOREIGN KEY (`district_id`) REFERENCES `reg_districts` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
