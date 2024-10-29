@@ -37,7 +37,7 @@
                 <div class="row mb-3">
                   <div class="col-lg-4 col-12 mb-3">
                     <label for="level">Level</label>
-                    <input type="text" name="level" id="level" class="form-control @error('level') is-invalid @enderror" value="petani" placeholder="Level" required readonly>
+                    <input type="text" name="level" id="level" class="form-control @error('level') is-invalid @enderror" value="{{ $level }}" placeholder="Level" required readonly>
                     @error('level')
                       <span class="text-danger text-sm font-italic">{{ $message }}</span>
                     @enderror
