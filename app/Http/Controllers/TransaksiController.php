@@ -51,6 +51,14 @@ class TransaksiController extends Controller
     return redirect()->route('transaksi.petani')->with('message', 'Data berhasil ditambahkan');
   }
 
+  public function petaniDelete($id)
+  {
+    $petani = TransaksiPetani::find($id);
+    $petani->delete();
+
+    return redirect()->route('transaksi.petani')->with('message', 'Data berhasil dihapus');
+  }
+
   public function pengepul()
   {
     $pengepuls = TransaksiPengepul::orderBy('id', 'desc')->limit(500)->get();
@@ -95,5 +103,13 @@ class TransaksiController extends Controller
     $pengepul->save();
 
     return redirect()->route('transaksi.pengepul')->with('message', 'Data berhasil ditambahkan');
+  }
+
+  public function pengepulDelete($id)
+  {
+    $pengepul = TransaksiPengepul::find($id);
+    $pengepul->delete();
+
+    return redirect()->route('transaksi.pengepul')->with('message', 'Data berhasil dihapus');
   }
 }

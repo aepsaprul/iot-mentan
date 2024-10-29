@@ -58,8 +58,7 @@
                         <div class="btn-group">
                           <i class="fas fa-cog dropdown-toggle text-primary" data-toggle="dropdown"></i>
                           <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="{{ route('pengepul.edit', [$pengepul->id]) }}" class="dropdown-item"><i class="fas fa-pencil-alt" style="width: 25px;"></i> Ubah</a></li>
-                            <li><a href="{{ route('pengepul.delete', [$pengepul->id]) }}" class="dropdown-item" onclick="return confirm('Yakin akan dihapus?')"><i class="fas fa-trash-alt" style="width: 25px;"></i> Hapus</a></li>
+                            <li><a href="{{ route('transaksi.pengepul.delete', [$pengepul->id]) }}" class="dropdown-item" onclick="return confirm('Yakin akan dihapus?')"><i class="fas fa-trash-alt" style="width: 25px;"></i> Hapus</a></li>
                           </ul>
                         </div>
                       </td>

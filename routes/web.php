@@ -93,11 +93,13 @@ Route::middleware(['auth'])->group(function () {
   Route::get('transaksi/petani', [TransaksiController::class, 'petani'])->name('transaksi.petani')->middleware('verified', 'permission:transaksi-petani');
   Route::get('transaksi/petani/create', [TransaksiController::class, 'petaniCreate'])->name('transaksi.petani.create')->middleware('verified', 'permission:transaksi-petani-create');
   Route::post('transaksi/petani/store', [TransaksiController::class, 'petaniStore'])->name('transaksi.petani.store');
+  Route::get('transaksi/petani/delete', [TransaksiController::class, 'petaniDelete'])->name('transaksi.petani.delete');
 
   // transaksi pengepul
   Route::get('transaksi/pengepul', [TransaksiController::class, 'pengepul'])->name('transaksi.pengepul')->middleware('verified', 'permission:transaksi-pengepul');
   Route::get('transaksi/pengepul/create', [TransaksiController::class, 'pengepulCreate'])->name('transaksi.pengepul.create')->middleware('verified', 'permission:transaksi-pengepul-create');
   Route::post('transaksi/pengepul/store', [TransaksiController::class, 'pengepulStore'])->name('transaksi.pengepul.store');
+  Route::get('transaksi/pengepul/delete', [TransaksiController::class, 'pengepulDelete'])->name('transaksi.pengepul.delete');
 
   // permission
   Route::get('adm/permission', [PermissionController::class, 'index'])->name('permission')->middleware('role:adm');
