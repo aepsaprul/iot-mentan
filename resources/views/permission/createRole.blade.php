@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') Tambah Role @endsection
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Tambah Permission @endsection
+@section('title') Tambah {{ $level }} @endsection
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -7,13 +7,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <h1 class="m-0">Tambah Permission</h1>
+          <h1 class="m-0">Akun {{ $level }}</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('permission') }}">Permission</a></li>
-            <li class="breadcrumb-item active">Tambah</li>
+            <li class="breadcrumb-item text-capitalize"><a href="{{ route($level) }}">{{ $level }}</a></li>
+            <li class="breadcrumb-item active">Akun</li>
           </ol>
         </div>
       </div>
@@ -26,28 +26,25 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <form action="{{ route('permission.store') }}" method="POST">
+              <form action="{{ route('pengguna.akun_update', [$pengguna->id]) }}" method="POST">
                 @csrf
+                @method("PUT")
                 <div class="form-group row">
-                  <label for="menu" class="col-sm-3 col-form-label">Nama Menu *</label>
+                  <label for="nama" class="col-sm-3 col-form-label">Nama Lengkap</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control @error('menu') is-invalid @enderror" name="menu" id="menu" value="{{ old('menu') }}" placeholder="Nama Permission" autofocus>
-                    @error('menu')
-                      <div class="col">
-                        <span class="text-danger font-italic">{{ $message }}</span>
-                      </div>
-                    @enderror
+                    <input type="text" class="form-control" name="nama" id="nama" value="{{ $pengguna->nama }}" placeholder="Nama Lengkap" readonly>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="name" class="col-sm-3 col-form-label">Nama Permission *</label>
+                  <label for="email" class="col-sm-3 col-form-label">Email</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Nama Permission" autofocus>
-                    @error('name')
-                      <div class="col">
-                        <span class="text-danger font-italic">{{ $message }}</span>
-                      </div>
-                    @enderror
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ $pengguna->dataUser ? $pengguna->dataUser->email : '' }}" placeholder="Email" autofocus>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="password" class="col-sm-3 col-form-label">Password</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="password" id="password" value="{{ $pengguna->dataUser ? $pengguna->dataUser->password_show : '' }}" placeholder="Password">
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -63,4 +60,5 @@
     </div>
   </div>
 </div>
+
 @endsection

@@ -110,7 +110,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('pedagang_besar') }}" class="nav-link {{ Request::is('pengguna/pedagang_besar*') ? 'active' : '' }}">
+                <a href="{{ route('pedagang') }}" class="nav-link {{ Request::is('pengguna/pedagang_besar*') ? 'active' : '' }}">
                   <i class="fas fa-caret-right nav-icon"></i>
                   <p>Pedagang Besar</p>
                 </a>

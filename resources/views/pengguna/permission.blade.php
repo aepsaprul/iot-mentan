@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Role Has Permission @endsection
+@section('title') Permission {{ $level }} @endsection
 @section('style')
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
@@ -25,13 +25,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <h3 class="m-0">Role Has Permission <span class="text-uppercase text-success font-weight-bold">{{ $role->name }}</span></h3>
+          <h3 class="m-0"><span class="text-capitalize">{{ $level }}</span> Permission <span class="text-uppercase text-success font-weight-bold">{{ $pengguna->nama }}</span></h3>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('permission') }}">Role</a></li>
-            <li class="breadcrumb-item active">Has Permission</li>
+            <li class="breadcrumb-item text-capitalize"><a href="{{ route($level) }}">{{ $level }}</a></li>
+            <li class="breadcrumb-item active">Permission</li>
           </ol>
         </div>
       </div>
@@ -44,12 +44,12 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <form action="{{ route('permission.role.has_permission.update') }}" method="POST">
+              <form action="{{ route('pengguna.permission.update') }}" method="POST">
                 @csrf
 
-                {{-- role name --}}
-                <input type="hidden" name="role" id="role" value="{{ $role->name }}">
-                <input type="hidden" name="role_id" id="role_id" value="{{ $role->id }}">
+                {{-- user id --}}
+                <input type="hidden" name="id" id="id" value="{{ $pengguna->id }}">
+                <input type="hidden" name="user_id" id="user_id" value="{{ $pengguna->user_id }}">
 
                 <table class="table table-bordered">
                   <thead>
@@ -90,8 +90,8 @@
                         <td>{{ $row->name }}</td>
                         <td class="text-center">
                           <input type="checkbox" name="permission[]" id="permission{{ $row->id }}" value="{{ $row->name }}"
-                          @foreach ($role_has_permissions as $role_has_permission)
-                            @if ($role_has_permission->dataPermission->name == $row->name && $role_has_permission->dataRole->name == $role->name)
+                          @foreach ($model_has_permissions as $model_has_permission)
+                            @if ($model_has_permission->dataPermission->name == $row->name && $model_has_permission->dataUser->id == $pengguna->dataUser->id)
                               checked
                             @endif
                           @endforeach
@@ -103,7 +103,8 @@
                 </table>
                 <div class="row mt-3">
                   <div class="col-12 text-right">
-                    <button type="submit" class="btn btn-primary" style="width: 130px;"><i class="fas fa-save"></i> Simpan</button>
+                    <button type="submit" name="btn_submit" value="btn_hapus" class="btn btn-danger" style="width: 130px;"><i class="fas fa-trash-alt"></i> Hapus</button>
+                    <button type="submit" name="btn_submit" value="btn_simpan" class="btn btn-primary" style="width: 130px;"><i class="fas fa-save"></i> Simpan</button>
                   </div>
                 </div>
               </form>

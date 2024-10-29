@@ -65,6 +65,10 @@ class PermissionController extends Controller
   public function delete($id)
   {
     $permission = Permission::find($id);
+
+    $permission->roles()->detach();
+    $permission->users()->detach();
+
     $permission->delete();
 
     return redirect()->route('permission')->with('message_permission', 'Data berhasil dihapus.');

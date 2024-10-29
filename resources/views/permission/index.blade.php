@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') Permission @endsection
 @section('style')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
