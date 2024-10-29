@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengepul;
-use App\Models\Petani;
+use App\Models\Pengguna;
 use App\Models\TransaksiPengepul;
 use App\Models\TransaksiPetani;
 use Illuminate\Http\Request;
@@ -20,13 +19,19 @@ class TransaksiController extends Controller
 
   public function petaniCreate()
   {
-    return view('transaksi.petani.create');
+    if (auth()->user()->hasRole('adm')) {
+      $petani = Pengguna::where('level', 'petani')->get();
+    } else {
+      $petani = Pengguna::where('user_id', Auth::user()->id)->first();
+    }
+
+    return view('transaksi.petani.create', ['petani' => $petani]);
   }
 
   public function petaniStore(Request $request)
   {
     $petani = new TransaksiPetani;
-    $petani->petani_id = $request->petani_id;
+    $petani->pengguna_id = $request->pengguna_id;
     $petani->lokasi_kebun = $request->lokasi_kebun;
     $petani->jumlah_tegakan = $request->jumlah_tegakan;
     $petani->umur_tanaman = $request->umur_tanaman;

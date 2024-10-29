@@ -9,7 +9,7 @@ class TransaksiPetani extends Model
 {
   use HasFactory;
 
-  public function dataPetani() {
-    return $this->belongsTo(Petani::class, 'petani_id', 'id');
+  public function dataPengguna() {
+    return $this->belongsTo(Pengguna::class, 'pengguna_id', 'id');
   }
 }

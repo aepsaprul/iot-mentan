@@ -46,6 +46,7 @@
                   <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
+                    <th class="text-center">IPFS Hash</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
@@ -53,7 +54,8 @@
                   @foreach ($petanis as $key => $petani)
                     <tr>
                       <td class="text-center p-1">{{ $key + 1 }}</td>
-                      <td class="p-1">{{ $petani->dataPetani ? $petani->dataPetani->nama : '' }}</td>
+                      <td class="p-1">{{ $petani->dataPengguna ? $petani->dataPengguna->nama : '' }}</td>
+                      <td class="p-1">{{ $petani->ipfs_hash }}</td>
                       <td class="text-center p-1">
                         <div class="btn-group">
                           <i class="fas fa-cog dropdown-toggle text-primary" data-toggle="dropdown"></i>
