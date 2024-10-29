@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Okt 2024 pada 09.42
+-- Waktu pembuatan: 29 Okt 2024 pada 04.51
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -110,7 +110,6 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(1, 'App\\Models\\User', 14),
 (3, 'App\\Models\\User', 2),
 (3, 'App\\Models\\User', 3);
 
@@ -178,6 +177,30 @@ CREATE TABLE `pengepuls` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `penggunas`
+--
+
+CREATE TABLE `penggunas` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `level` varchar(30) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `telepon` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `provinsi_id` int(11) NOT NULL,
+  `kabupaten_id` int(11) NOT NULL,
+  `kecamatan_id` int(11) NOT NULL,
+  `luas_lahan` int(11) NOT NULL,
+  `komoditas` varchar(50) NOT NULL,
+  `ipfs_hash` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `permissions`
 --
 
@@ -198,21 +221,9 @@ INSERT INTO `permissions` (`id`, `menu`, `name`, `guard_name`, `created_at`, `up
 (1, 'dashboard', 'dashboard', 'web', '2024-10-27 13:08:13', '2024-10-27 13:08:13'),
 (2, 'adm', 'adm', 'web', '2024-10-27 13:08:49', '2024-10-27 13:08:49'),
 (3, 'petani', 'petani', 'web', '2024-10-27 13:09:17', '2024-10-27 13:09:17'),
-(4, 'petani', 'petani-tambah', 'web', '2024-10-27 13:10:01', '2024-10-27 13:10:01'),
-(5, 'petani', 'petani-ubah', 'web', '2024-10-27 13:10:16', '2024-10-27 13:10:16'),
-(6, 'petani', 'petani-hapus', 'web', '2024-10-27 13:10:26', '2024-10-27 13:10:26'),
 (7, 'pengepul', 'pengepul', 'web', '2024-10-27 13:11:14', '2024-10-27 13:11:14'),
-(8, 'pengepul', 'pengepul-tambah', 'web', '2024-10-27 13:11:25', '2024-10-27 13:11:25'),
-(9, 'pengepul', 'pengepul-ubah', 'web', '2024-10-27 13:11:34', '2024-10-27 13:11:34'),
-(10, 'pengepul', 'pengepul-hapus', 'web', '2024-10-27 13:11:48', '2024-10-27 13:11:48'),
 (11, 'pedagang', 'pedagang', 'web', '2024-10-27 13:12:18', '2024-10-27 13:12:18'),
-(12, 'pedagang', 'pedagang-tambah', 'web', '2024-10-27 13:14:00', '2024-10-27 13:14:00'),
-(13, 'pedagang', 'pedagang-ubah', 'web', '2024-10-27 13:14:11', '2024-10-27 13:14:11'),
-(14, 'pedagang', 'pedagang-hapus', 'web', '2024-10-27 13:14:20', '2024-10-27 13:14:20'),
 (15, 'eksportir', 'eksportir', 'web', '2024-10-27 13:14:51', '2024-10-27 13:15:19'),
-(16, 'eksportir', 'eksportir-tambah', 'web', '2024-10-27 13:15:35', '2024-10-27 13:15:35'),
-(17, 'eksportir', 'eksportir-ubah', 'web', '2024-10-27 13:15:45', '2024-10-27 13:15:45'),
-(18, 'eksportir', 'eksportir-hapus', 'web', '2024-10-27 13:15:58', '2024-10-27 13:15:58'),
 (19, 'transaksi petani', 'transaksi-petani', 'web', '2024-10-27 13:23:53', '2024-10-27 13:23:53'),
 (20, 'transaksi petani', 'transaksi-petani-create', 'web', '2024-10-27 13:24:10', '2024-10-27 13:24:10'),
 (21, 'transaksi pengepul', 'transaksi-pengepul', 'web', '2024-10-27 13:24:29', '2024-10-27 13:24:29'),
@@ -222,8 +233,12 @@ INSERT INTO `permissions` (`id`, `menu`, `name`, `guard_name`, `created_at`, `up
 (25, 'transaksi eksportir', 'transaksi-eksportir', 'web', '2024-10-27 13:26:01', '2024-10-27 13:26:01'),
 (26, 'transaksi eksportir', 'transaksi-eksportir-create', 'web', '2024-10-27 13:26:17', '2024-10-27 13:26:17'),
 (27, 'upload dokumen coa', 'upload-dokumen-coa', 'web', '2024-10-27 13:28:06', '2024-10-27 13:28:06'),
-(28, 'pengepul', 'pengepul-akun', 'web', '2024-10-27 21:08:59', '2024-10-27 21:08:59'),
-(29, 'pengepul', 'pengepul-permission', 'web', '2024-10-27 21:10:13', '2024-10-27 21:10:13');
+(30, 'pengguna', 'pengguna-create', 'web', '2024-10-28 13:08:11', '2024-10-28 13:08:11'),
+(31, 'pengguna', 'pengguna-tambah', 'web', '2024-10-28 13:08:27', '2024-10-28 13:08:27'),
+(32, 'pengguna', 'pengguna-ubah', 'web', '2024-10-28 13:08:36', '2024-10-28 13:08:36'),
+(33, 'pengguna', 'pengguna-hapus', 'web', '2024-10-28 13:08:45', '2024-10-28 13:08:45'),
+(34, 'pengguna', 'pengguna-akun', 'web', '2024-10-28 13:20:24', '2024-10-28 13:20:24'),
+(35, 'pengguna', 'pengguna-permission', 'web', '2024-10-28 13:20:42', '2024-10-28 13:20:42');
 
 -- --------------------------------------------------------
 
@@ -8208,23 +8223,13 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
 (7, 1),
-(8, 1),
-(9, 1),
-(10, 1),
 (11, 1),
-(12, 1),
-(13, 1),
-(14, 1),
 (15, 1),
-(16, 1),
-(17, 1),
-(18, 1),
 (19, 1),
+(19, 2),
 (20, 1),
+(20, 2),
 (21, 1),
 (21, 3),
 (22, 1),
@@ -8234,8 +8239,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (25, 1),
 (26, 1),
 (27, 1),
-(28, 1),
-(29, 1);
+(30, 1),
+(31, 1),
+(32, 1),
+(33, 1),
+(34, 1),
+(35, 1);
 
 -- --------------------------------------------------------
 
@@ -8454,6 +8463,12 @@ ALTER TABLE `pengepuls`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `penggunas`
+--
+ALTER TABLE `penggunas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
@@ -8581,10 +8596,16 @@ ALTER TABLE `pengepuls`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `penggunas`
+--
+ALTER TABLE `penggunas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -8632,7 +8653,7 @@ ALTER TABLE `transaksi_petanis`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
