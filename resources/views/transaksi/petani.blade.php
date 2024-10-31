@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Transaksi Pengepul @endsection
+@section('title') Transaksi Petani @endsection
 @section('style')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -14,12 +14,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">
-          <h1 class="m-0">Transaksi Pengepul</h1>
+          <h1 class="m-0">Transaksi Petani</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-            <li class="breadcrumb-item active">Transaksi Pengepul</li>
+            <li class="breadcrumb-item active">Transaksi Petani</li>
           </ol>
         </div>
       </div>
@@ -32,7 +32,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="{{ route('transaksi.pengepul.create') }}" class="btn btn-sm btn-primary" style="width: 130px;"><i class="fas fa-plus"></i> Tambah</a>
+              <a href="{{ route('transaksi.create', ['petani']) }}" class="btn btn-sm btn-primary" style="width: 130px;"><i class="fas fa-plus"></i> Tambah</a>
             </div>
             <div class="card-body">
               @if (session('message'))
@@ -41,24 +41,27 @@
                   <i class="icon fas fa-check"></i> {{ session('message') }}
                 </div>
               @endif
-              <table id="tabel_pengepul" class="table table-bordered table-striped">
+              <table id="tabel_petani" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
+                    <th class="text-center">IPFS Hash</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($pengepuls as $key => $pengepul)
+                  @foreach ($petanis as $key => $petani)
                     <tr>
                       <td class="text-center p-1">{{ $key + 1 }}</td>
-                      <td class="p-1">{{ $pengepul->datapengepul ? $pengepul->datapengepul->nama : '' }}</td>
+                      <td class="p-1">{{ $petani->dataPengguna ? $petani->dataPengguna->nama : '' }}</td>
+                      <td class="p-1">{{ $petani->ipfs_hash }}</td>
                       <td class="text-center p-1">
                         <div class="btn-group">
                           <i class="fas fa-cog dropdown-toggle text-primary" data-toggle="dropdown"></i>
                           <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="{{ route('transaksi.pengepul.delete', [$pengepul->id]) }}" class="dropdown-item" onclick="return confirm('Yakin akan dihapus?')"><i class="fas fa-trash-alt" style="width: 25px;"></i> Hapus</a></li>
+                            <li><a href="{{ route('transaksi.delete', [$petani->id]) }}" class="dropdown-item" onclick="return confirm('Yakin akan dihapus?')"><i class="fas fa-trash-alt" style="width: 25px;"></i> Detail</a></li>
+                            <li><a href="{{ route('transaksi.delete', [$petani->id]) }}" class="dropdown-item" onclick="return confirm('Yakin akan dihapus?')"><i class="fas fa-trash-alt" style="width: 25px;"></i> Hapus</a></li>
                           </ul>
                         </div>
                       </td>
@@ -84,7 +87,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#tabel_pengepul').DataTable({
+    $('#tabel_petani').DataTable({
       "responsive": true,
       "theme": 'bootstrap4'
     });

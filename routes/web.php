@@ -61,45 +61,26 @@ Route::middleware(['auth'])->group(function () {
   Route::get('pengguna/{id}/permission', [PenggunaController::class, 'permission'])->name('pengguna.permission')->middleware(['permission:pengguna-permission']);
   Route::post('pengguna/permission/update', [PenggunaController::class, 'permissionUpdate'])->name('pengguna.permission.update');
 
-  // pengepul
-  // Route::get('pengguna/pengepul', [PengepulController::class, 'index'])->name('pengepul')->middleware('verified', 'permission:pengepul');
-  // Route::get('pengguna/pengepul/create', [PengepulController::class, 'create'])->name('pengepul.create')->middleware('verified', 'permission:pengepul-tambah');
-  // Route::post('pengguna/pengepul/store', [PengepulController::class, 'store'])->name('pengepul.store');
-  // Route::get('pengguna/pengepul/{id}/edit', [PengepulController::class, 'edit'])->name('pengepul.edit')->middleware('verified', 'permission:pengepul-ubah');
-  // Route::put('pengguna/pengepul/{id}/update', [PengepulController::class, 'update'])->name('pengepul.update');
-  // Route::get('pengguna/pengepul/{id}/delete', [PengepulController::class, 'delete'])->name('pengepul.delete');
-  // Route::get('pengguna/pengepul/{id}/akun', [PengepulController::class, 'akun'])->name('pengepul.akun')->middleware(['permission:pengepul-akun']);
-  // Route::put('pengguna/pengepul/{id}/akun_update', [PengepulController::class, 'akunUpdate'])->name('pengepul.akun_update');
-  // Route::get('pengguna/pengepul/{id}/permission', [PengepulController::class, 'permission'])->name('pengepul.permission')->middleware(['permission:pengepul-permission']);
-  // Route::post('pengguna/pengepul/permission/update', [PengepulController::class, 'permissionUpdate'])->name('pengepul.permission.update');
-
-  // pedagang_besar
-  // Route::get('pengguna/pedagang_besar', [PedagangBesarController::class, 'index'])->name('pedagang_besar')->middleware('verified', 'permission:pedagang');
-  // Route::get('pengguna/pedagang_besar/create', [PedagangBesarController::class, 'create'])->name('pedagang_besar.create')->middleware('verified', 'permission:pedagang-tambah');
-  // Route::post('pengguna/pedagang_besar/store', [PedagangBesarController::class, 'store'])->name('pedagang_besar.store');
-  // Route::get('pengguna/pedagang_besar/{id}/edit', [PedagangBesarController::class, 'edit'])->name('pedagang_besar.edit')->middleware('verified', 'permission:pedagang-ubah');
-  // Route::put('pengguna/pedagang_besar/{id}/update', [PedagangBesarController::class, 'update'])->name('pedagang_besar.update');
-  // Route::get('pengguna/pedagang_besar/{id}/delete', [PedagangBesarController::class, 'delete'])->name('pedagang_besar.delete');
-
-  // eksportir
-  // Route::get('pengguna/eksportir', [EksportirController::class, 'index'])->name('eksportir')->middleware('verified', 'permission:eksportir');
-  // Route::get('pengguna/eksportir/create', [EksportirController::class, 'create'])->name('eksportir.create')->middleware('verified', 'permission:eksportir-tambah');
-  // Route::post('pengguna/eksportir/store', [EksportirController::class, 'store'])->name('eksportir.store');
-  // Route::get('pengguna/eksportir/{id}/edit', [EksportirController::class, 'edit'])->name('eksportir.edit')->middleware('verified', 'permission:eksportir-ubah');
-  // Route::put('pengguna/eksportir/{id}/update', [EksportirController::class, 'update'])->name('eksportir.update');
-  // Route::get('pengguna/eksportir/{id}/delete', [EksportirController::class, 'delete'])->name('eksportir.delete');
-
-  // transaksi petani
+  // transaksi
   Route::get('transaksi/petani', [TransaksiController::class, 'petani'])->name('transaksi.petani')->middleware('verified', 'permission:transaksi-petani');
-  Route::get('transaksi/petani/create', [TransaksiController::class, 'petaniCreate'])->name('transaksi.petani.create')->middleware('verified', 'permission:transaksi-petani-create');
-  Route::post('transaksi/petani/store', [TransaksiController::class, 'petaniStore'])->name('transaksi.petani.store');
-  Route::get('transaksi/petani/{id}/delete', [TransaksiController::class, 'petaniDelete'])->name('transaksi.petani.delete');
+  Route::get('transaksi/pengepul', [TransaksiController::class, 'pengepul'])->name('transaksi.pengepul')->middleware('verified', 'permission:transaksi-pengepul');
+  Route::get('transaksi/pedagang', [TransaksiController::class, 'pedagang'])->name('transaksi.pedagang')->middleware('verified', 'permission:transaksi-pedagang');
+  Route::get('transaksi/eksportir', [TransaksiController::class, 'eksportir'])->name('transaksi.eksportir')->middleware('verified', 'permission:transaksi-eksportir');
+  Route::get('transaksi/{level}/create', [TransaksiController::class, 'create'])->name('transaksi.create')->middleware('verified', 'permission:transaksi-create');
+  Route::post('transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
+  Route::get('transaksi/{id}/delete', [TransaksiController::class, 'delete'])->name('transaksi.delete');
 
   // transaksi pengepul
-  Route::get('transaksi/pengepul', [TransaksiController::class, 'pengepul'])->name('transaksi.pengepul')->middleware('verified', 'permission:transaksi-pengepul');
-  Route::get('transaksi/pengepul/create', [TransaksiController::class, 'pengepulCreate'])->name('transaksi.pengepul.create')->middleware('verified', 'permission:transaksi-pengepul-create');
-  Route::post('transaksi/pengepul/store', [TransaksiController::class, 'pengepulStore'])->name('transaksi.pengepul.store');
-  Route::get('transaksi/pengepul/{id}/delete', [TransaksiController::class, 'pengepulDelete'])->name('transaksi.pengepul.delete');
+  // Route::get('transaksi/pengepul', [TransaksiController::class, 'pengepul'])->name('transaksi.pengepul')->middleware('verified', 'permission:transaksi-pengepul');
+  // Route::get('transaksi/pengepul/create', [TransaksiController::class, 'pengepulCreate'])->name('transaksi.pengepul.create')->middleware('verified', 'permission:transaksi-pengepul-create');
+  // Route::post('transaksi/pengepul/store', [TransaksiController::class, 'pengepulStore'])->name('transaksi.pengepul.store');
+  // Route::get('transaksi/pengepul/{id}/delete', [TransaksiController::class, 'pengepulDelete'])->name('transaksi.pengepul.delete');
+
+  // transaksi pedagang
+  // Route::get('transaksi/pedagang', [TransaksiController::class, 'pedagang'])->name('transaksi.pedagang')->middleware('verified', 'permission:transaksi-pedagang');
+  // Route::get('transaksi/pedagang/create', [TransaksiController::class, 'pedagangCreate'])->name('transaksi.pedagang.create')->middleware('verified', 'permission:transaksi-pedagang-create');
+  // Route::post('transaksi/pedagang/store', [TransaksiController::class, 'pedagangStore'])->name('transaksi.pedagang.store');
+  // Route::get('transaksi/pedagang/{id}/delete', [TransaksiController::class, 'pedagangDelete'])->name('transaksi.pedagang.delete');
 
   // permission
   Route::get('adm/permission', [PermissionController::class, 'index'])->name('permission')->middleware('role:adm');

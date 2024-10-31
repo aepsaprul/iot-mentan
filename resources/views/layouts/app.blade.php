@@ -71,105 +71,131 @@
               </p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('adm*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Request::is('adm*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-user-tie"></i>
-              <p>
-                Adm
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('permission') }}" class="nav-link {{ Request::is('adm/permission*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Pemission</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item {{ Request::is('pengguna*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Request::is('pengguna*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Pengguna
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('petani') }}" class="nav-link {{ Request::is('pengguna/petani*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Petani</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('pengepul') }}" class="nav-link {{ Request::is('pengguna/pengepul*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Pengepul</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('pedagang') }}" class="nav-link {{ Request::is('pengguna/pedagang*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Pedagang Besar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('eksportir') }}" class="nav-link {{ Request::is('pengguna/eksportir*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Eksportir</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item {{ Request::is('transaksi*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>
-                Transaksi
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('transaksi.petani') }}" class="nav-link {{ Request::is('transaksi/petani*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Transaksi Panen Petani</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('transaksi.pengepul') }}" class="nav-link {{ Request::is('transaksi/pengepul*') ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Transaksi Ke Pengepul</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Transaksi Ke Pedagang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Transaksi Eksportir</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Upload Dokumen COA</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>History Transaksi</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          @if (auth()->user()->can('adm'))
+            <li class="nav-item {{ Request::is('adm*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('adm*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-tie"></i>
+                <p>
+                  Adm
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('permission') }}" class="nav-link {{ Request::is('adm/permission*') ? 'active' : '' }}">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>Pemission</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
+          @if (
+            auth()->user()->can('petani') ||
+            auth()->user()->can('pengepul') ||
+            auth()->user()->can('pedagang') ||
+            auth()->user()->can('eksportir') ||
+            auth()->user()->hasRole('adm')
+          )
+            <li class="nav-item {{ Request::is('pengguna*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('pengguna*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Pengguna
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('petani') }}" class="nav-link {{ Request::is('pengguna/petani*') ? 'active' : '' }}">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>Petani</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('pengepul') }}" class="nav-link {{ Request::is('pengguna/pengepul*') ? 'active' : '' }}">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>Pengepul</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('pedagang') }}" class="nav-link {{ Request::is('pengguna/pedagang*') ? 'active' : '' }}">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>Pedagang Besar</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('eksportir') }}" class="nav-link {{ Request::is('pengguna/eksportir*') ? 'active' : '' }}">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>Eksportir</p>
+                  </a>
+                </li>
+              </ul>
+            </li>              
+          @endif
+          @if (
+            auth()->user()->can('transaksi-petani') ||
+            auth()->user()->can('transaksi-pengepul') ||
+            auth()->user()->can('transaksi-pedagang') ||
+            auth()->user()->can('transaksi-eksportir') ||
+            auth()->user()->hasRole('adm')
+          )
+            <li class="nav-item {{ Request::is('transaksi*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>
+                  Transaksi
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @if (auth()->user()->can('petani') || auth()->user()->hasRole('petani') || auth()->user()->hasRole('adm'))
+                  <li class="nav-item">
+                    <a href="{{ route('transaksi.petani') }}" class="nav-link {{ Request::is('transaksi/petani*') ? 'active' : '' }}">
+                      <i class="fas fa-caret-right nav-icon"></i>
+                      <p>Transaksi Panen Petani</p>
+                    </a>
+                  </li>
+                @endif
+                @if (auth()->user()->can('pengepul') || auth()->user()->hasRole('pengepul') || auth()->user()->hasRole('adm'))
+                  <li class="nav-item">
+                    <a href="{{ route('transaksi.pengepul') }}" class="nav-link {{ Request::is('transaksi/pengepul*') ? 'active' : '' }}">
+                      <i class="fas fa-caret-right nav-icon"></i>
+                      <p>Transaksi Ke Pengepul</p>
+                    </a>
+                  </li>
+                @endif
+                @if (auth()->user()->can('pedagang') || auth()->user()->hasRole('pedagang') || auth()->user()->hasRole('adm'))
+                  <li class="nav-item">
+                    <a href="{{ route('transaksi.pedagang') }}" class="nav-link {{ Request::is('transaksi/pedagang*') ? 'active' : '' }}">
+                      <i class="fas fa-caret-right nav-icon"></i>
+                      <p>Transaksi Ke Pedagang</p>
+                    </a>
+                  </li>
+                @endif
+                @if (auth()->user()->can('eksportir') || auth()->user()->hasRole('eksportir') || auth()->user()->hasRole('adm'))
+                  <li class="nav-item">
+                    <a href="{{ route('transaksi.eksportir') }}" class="nav-link {{ Request::is('transaksi/eksportir*') ? 'active' : '' }}">
+                      <i class="fas fa-caret-right nav-icon"></i>
+                      <p>Transaksi Eksportir</p>
+                    </a>
+                  </li>
+                @endif
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>Upload Dokumen COA</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-caret-right nav-icon"></i>
+                    <p>History Transaksi</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-box"></i>
