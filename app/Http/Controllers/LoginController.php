@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
+use App\Models\RegDistrict;
+use App\Models\RegProvince;
+use App\Models\RegRegency;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Eksportir;
-use App\Models\PedagangBesar;
-use App\Models\Pengepul;
-use App\Models\Petani;
-use App\Models\RegProvince;
-use App\Models\RegRegency;
-use App\Models\RegDistrict;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -121,20 +118,23 @@ class LoginController extends Controller
     $user->level = $jenis;
     $user->save();
 
+    $pengguna = new Pengguna;
+
     if ($jenis == "petani") {
       $user->assignRole('petani');
-      $pengguna = new Petani;
+      $pengguna->level = "petani";
     } elseif ($jenis == "pengepul") {
       $user->assignRole('pengepul');
-      $pengguna = new Pengepul;
+      $pengguna->level = "pengepul";
     } elseif ($jenis == "pedagang_besar") {
       $user->assignRole('pedagang');
-      $pengguna = new PedagangBesar;
+      $pengguna->level = "pedagang";
     } else {
       $user->assignRole('pengepul');
-      $pengguna = new Eksportir;
+      $pengguna->level = "eksportir";
     }
     
+    $pengguna->user_id = $user->id;
     $pengguna->nama = $request->nama;
     $pengguna->telepon = $request->telepon;
     $pengguna->email = $request->email;
@@ -142,6 +142,7 @@ class LoginController extends Controller
     $pengguna->provinsi_id = $request->provinsi_id;
     $pengguna->kabupaten_id = $request->kabupaten_id;
     $pengguna->kecamatan_id = $request->kecamatan_id;
+    $pengguna->ipfs_hash = "tes";
     $pengguna->save();    
 
     return redirect()->route('login');

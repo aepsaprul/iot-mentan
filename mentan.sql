@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Okt 2024 pada 04.51
+-- Waktu pembuatan: 01 Nov 2024 pada 03.10
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -20,26 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `mentan`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `eksportirs`
---
-
-CREATE TABLE `eksportirs` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `telepon` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `provinsi_id` int(11) DEFAULT NULL,
-  `kabupaten_id` int(11) DEFAULT NULL,
-  `kecamatan_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -92,6 +72,15 @@ CREATE TABLE `model_has_permissions` (
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data untuk tabel `model_has_permissions`
+--
+
+INSERT INTO `model_has_permissions` (`permission_id`, `model_type`, `model_id`) VALUES
+(3, 'App\\Models\\User', 11),
+(11, 'App\\Models\\User', 12),
+(23, 'App\\Models\\User', 12);
+
 -- --------------------------------------------------------
 
 --
@@ -110,8 +99,20 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 14),
+(2, 'App\\Models\\User', 15),
+(2, 'App\\Models\\User', 16),
 (3, 'App\\Models\\User', 2),
-(3, 'App\\Models\\User', 3);
+(3, 'App\\Models\\User', 3),
+(3, 'App\\Models\\User', 10),
+(3, 'App\\Models\\User', 11),
+(3, 'App\\Models\\User', 17),
+(4, 'App\\Models\\User', 12),
+(4, 'App\\Models\\User', 18),
+(4, 'App\\Models\\User', 19),
+(5, 'App\\Models\\User', 13),
+(5, 'App\\Models\\User', 20),
+(5, 'App\\Models\\User', 21);
 
 -- --------------------------------------------------------
 
@@ -124,55 +125,6 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pedagang_besars`
---
-
-CREATE TABLE `pedagang_besars` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `telepon` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `provinsi_id` int(11) DEFAULT NULL,
-  `kabupaten_id` int(11) DEFAULT NULL,
-  `kecamatan_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pedagang_besars`
---
-
-INSERT INTO `pedagang_besars` (`id`, `user_id`, `nama`, `telepon`, `email`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `created_at`, `updated_at`) VALUES
-(1, 0, 'Pedagang Satu', '0987898731', 'pedagang1@email.com', 'Jl Pahlawan', 33, 3303, 330301, '2024-10-21 21:28:30', '2024-10-21 21:28:30'),
-(2, 0, 'Pedagang Dua', '0987898732', 'pedagang2@email.com', 'Jl Pahlawan', 33, 3303, 330302, '2024-10-21 21:28:46', '2024-10-21 21:28:46'),
-(3, 0, 'Pedagang Tiga', '0987898733', 'pedagang3@email.com', 'Jl Pahlawan', 33, 3303, 330303, '2024-10-21 21:29:04', '2024-10-21 21:29:04');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pengepuls`
---
-
-CREATE TABLE `pengepuls` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `telepon` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `provinsi_id` int(11) DEFAULT NULL,
-  `kabupaten_id` int(11) DEFAULT NULL,
-  `kecamatan_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -197,6 +149,24 @@ CREATE TABLE `penggunas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `penggunas`
+--
+
+INSERT INTO `penggunas` (`id`, `user_id`, `level`, `nama`, `telepon`, `email`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `luas_lahan`, `komoditas`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
+(3, 10, 'pengepul', 'Pengepul Tiga', '09878987', 'pengepul3@email.com', 'alamat pengepul tiga', 33, 3301, 330106, 951, 'pala', 'tes', '2024-10-28 21:23:53', '2024-10-28 21:23:53'),
+(4, 11, 'pengepul', 'Pengepul Empat', '09878987', 'pengepul4@email.com', 'alamat pengepul empat', 33, 3302, 330203, 951, 'pala', 'tes', '2024-10-28 21:24:56', '2024-10-28 21:25:17'),
+(5, 12, 'pedagang', 'Pedagang Satu1', '098789871', 'pedagang1@email.com', 'alamat pedagang satu1', 31, 3175, 317507, 901, 'pala1', 'tes', '2024-10-28 23:23:53', '2024-10-28 23:24:25'),
+(6, 13, 'eksportir', 'Eksportir Satu', '09878987', 'eksportir1@email.com', 'alamat eksportir satu', 33, 3305, 330501, 901, 'pala', 'tes', '2024-10-28 23:26:57', '2024-10-28 23:26:57'),
+(7, 14, 'petani', 'Petani Satu', '09878987', 'petani1@gmail.com', 'alamat petani satu', 31, 3171, 317101, 95, 'pala', 'tes', '2024-10-29 00:36:06', '2024-10-29 00:36:06'),
+(8, 15, 'petani', 'Petani Dua', '09878987', 'petani2@email.com', 'alamat petani dua', 31, 3171, 317103, 95, 'pala', 'tes', '2024-10-29 00:36:42', '2024-10-29 00:36:42'),
+(9, 16, 'petani', 'Petani Tiga', '09878987', 'petani3@email.com', 'alamat petani tiga', 31, 3171, 317106, 901, 'pala', 'tes', '2024-10-29 00:37:23', '2024-10-29 00:37:23'),
+(10, 17, 'pengepul', 'Pengepul Lima', '0987898722', 'pengepul5@email.com', 'alamat pengepul lima', 32, 3205, 320501, 10, 'pala', 'tes', '2024-10-29 00:38:18', '2024-10-29 00:38:18'),
+(11, 18, 'pedagang', 'Pedagang Dua', '0987898721', 'pedagang2@email.com', 'alamat pedagang dua', 33, 3304, 330404, 80, 'pala', 'tes', '2024-10-29 00:39:01', '2024-10-29 00:39:01'),
+(12, 19, 'pedagang', 'Pedagang Tiga', '0987898712', 'pedagang3@email.com', 'alamat pedagang tiga', 33, 3305, 330504, 70, 'pala', 'tes', '2024-10-29 00:39:42', '2024-10-29 00:39:42'),
+(13, 20, 'eksportir', 'Eksportir Dua', '0987898722', 'eksportir2@email.com', 'alamat eksportir dua', 15, 1504, 150405, 77, 'pala', 'tes', '2024-10-29 00:40:21', '2024-10-29 00:40:21'),
+(14, 21, 'eksportir', 'Eksportir Tiga', '0987898721', 'eksportir3@email.com', 'alamat eksportir tiga', 33, 3304, 330404, 85, 'pala', 'tes', '2024-10-29 00:41:36', '2024-10-29 00:41:36');
 
 -- --------------------------------------------------------
 
@@ -225,20 +195,17 @@ INSERT INTO `permissions` (`id`, `menu`, `name`, `guard_name`, `created_at`, `up
 (11, 'pedagang', 'pedagang', 'web', '2024-10-27 13:12:18', '2024-10-27 13:12:18'),
 (15, 'eksportir', 'eksportir', 'web', '2024-10-27 13:14:51', '2024-10-27 13:15:19'),
 (19, 'transaksi petani', 'transaksi-petani', 'web', '2024-10-27 13:23:53', '2024-10-27 13:23:53'),
-(20, 'transaksi petani', 'transaksi-petani-create', 'web', '2024-10-27 13:24:10', '2024-10-27 13:24:10'),
 (21, 'transaksi pengepul', 'transaksi-pengepul', 'web', '2024-10-27 13:24:29', '2024-10-27 13:24:29'),
-(22, 'transaksi pengepul', 'transaksi-pengepul-create', 'web', '2024-10-27 13:24:51', '2024-10-27 13:24:51'),
 (23, 'transaksi pedagang', 'transaksi-pedagang', 'web', '2024-10-27 13:25:25', '2024-10-27 13:25:25'),
-(24, 'transaksi pedagang', 'transaksi-pedagang-create', 'web', '2024-10-27 13:25:41', '2024-10-27 13:25:41'),
 (25, 'transaksi eksportir', 'transaksi-eksportir', 'web', '2024-10-27 13:26:01', '2024-10-27 13:26:01'),
-(26, 'transaksi eksportir', 'transaksi-eksportir-create', 'web', '2024-10-27 13:26:17', '2024-10-27 13:26:17'),
 (27, 'upload dokumen coa', 'upload-dokumen-coa', 'web', '2024-10-27 13:28:06', '2024-10-27 13:28:06'),
 (30, 'pengguna', 'pengguna-create', 'web', '2024-10-28 13:08:11', '2024-10-28 13:08:11'),
 (31, 'pengguna', 'pengguna-tambah', 'web', '2024-10-28 13:08:27', '2024-10-28 13:08:27'),
 (32, 'pengguna', 'pengguna-ubah', 'web', '2024-10-28 13:08:36', '2024-10-28 13:08:36'),
 (33, 'pengguna', 'pengguna-hapus', 'web', '2024-10-28 13:08:45', '2024-10-28 13:08:45'),
 (34, 'pengguna', 'pengguna-akun', 'web', '2024-10-28 13:20:24', '2024-10-28 13:20:24'),
-(35, 'pengguna', 'pengguna-permission', 'web', '2024-10-28 13:20:42', '2024-10-28 13:20:42');
+(35, 'pengguna', 'pengguna-permission', 'web', '2024-10-28 13:20:42', '2024-10-28 13:20:42'),
+(36, 'transaksi', 'transaksi-create', 'web', '2024-10-29 19:10:03', '2024-10-29 19:10:03');
 
 -- --------------------------------------------------------
 
@@ -258,29 +225,6 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `petanis`
---
-
-CREATE TABLE `petanis` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `telepon` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `provinsi_id` int(11) DEFAULT NULL,
-  `kabupaten_id` int(11) DEFAULT NULL,
-  `kecamatan_id` int(11) DEFAULT NULL,
-  `luas_lahan` int(11) DEFAULT NULL COMMENT 'per meter',
-  `komoditas` varchar(100) DEFAULT NULL,
-  `ipfs_hash` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -8228,23 +8172,74 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (15, 1),
 (19, 1),
 (19, 2),
-(20, 1),
-(20, 2),
 (21, 1),
 (21, 3),
-(22, 1),
-(22, 3),
 (23, 1),
-(24, 1),
+(23, 4),
 (25, 1),
-(26, 1),
+(25, 5),
 (27, 1),
 (30, 1),
 (31, 1),
 (32, 1),
 (33, 1),
 (34, 1),
-(35, 1);
+(35, 1),
+(36, 1),
+(36, 2),
+(36, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksis`
+--
+
+CREATE TABLE `transaksis` (
+  `id` int(11) NOT NULL,
+  `level` varchar(30) NOT NULL,
+  `pengguna_id` int(11) NOT NULL,
+  `ipfs_hash` varchar(255) NOT NULL,
+  `penjual_id` int(11) DEFAULT NULL,
+  `lokasi_kebun` varchar(100) DEFAULT NULL,
+  `jumlah_tegakan` int(11) DEFAULT NULL,
+  `umur_tanaman` int(11) DEFAULT NULL,
+  `varietas_tanaman` varchar(100) DEFAULT NULL,
+  `tanggal_panen` timestamp NULL DEFAULT NULL,
+  `jumlah_panen` int(11) DEFAULT NULL,
+  `bobot_biji_pala_kering` smallint(6) DEFAULT NULL,
+  `bobot_fuli_kering` smallint(6) DEFAULT NULL,
+  `tempat_penyimpanan` varchar(20) DEFAULT NULL,
+  `jumlah_produk_berdasarkan_mutu` int(11) DEFAULT NULL,
+  `no_sertifikat_coa` varchar(50) DEFAULT NULL,
+  `tanggal_ekspor` timestamp NULL DEFAULT NULL,
+  `kadar_air_produk` int(11) DEFAULT NULL,
+  `perlakuan` varchar(100) DEFAULT NULL,
+  `metode_pengeringan` varchar(30) NOT NULL,
+  `tanggal_mulai_pengeringan` timestamp NULL DEFAULT NULL,
+  `tanggal_selesai_pengeringan` timestamp NULL DEFAULT NULL,
+  `kadar_air` int(11) DEFAULT NULL,
+  `kondisi_penyimpanan` varchar(20) DEFAULT NULL,
+  `bahan_pengemas` varchar(30) DEFAULT NULL,
+  `tanggal_penjualan` timestamp NULL DEFAULT NULL,
+  `metode_pengiriman` varchar(50) DEFAULT NULL,
+  `harga` double NOT NULL DEFAULT 0,
+  `nama_pembeli` varchar(50) NOT NULL,
+  `alamat_pembeli` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transaksis`
+--
+
+INSERT INTO `transaksis` (`id`, `level`, `pengguna_id`, `ipfs_hash`, `penjual_id`, `lokasi_kebun`, `jumlah_tegakan`, `umur_tanaman`, `varietas_tanaman`, `tanggal_panen`, `jumlah_panen`, `bobot_biji_pala_kering`, `bobot_fuli_kering`, `tempat_penyimpanan`, `jumlah_produk_berdasarkan_mutu`, `no_sertifikat_coa`, `tanggal_ekspor`, `kadar_air_produk`, `perlakuan`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `kadar_air`, `kondisi_penyimpanan`, `bahan_pengemas`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `created_at`, `updated_at`) VALUES
+(1, 'petani', 7, 'tes', NULL, 'lokasi', 10, 3, 'varietas', '2024-10-29 17:00:00', 10, 30, 20, 'penyimpanan1', NULL, NULL, NULL, NULL, NULL, 'metode pengeringan 1', '2024-10-29 17:00:00', '2024-10-29 17:00:00', NULL, NULL, NULL, NULL, NULL, 0, 'nama 1', 'alamat 1', '2024-10-30 03:01:56', '2024-10-30 03:01:56'),
+(2, 'eksportir', 6, 'tes', 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '213444', '2024-10-30 17:00:00', 2, 'perlakuan', 'metod pengeringan', '2024-10-30 17:00:00', '2024-10-30 17:00:00', 3, 'kondis penyimapnan', 'pengemas', NULL, NULL, 0, 'nma pep', 'tes', '2024-10-30 18:47:03', '2024-10-30 18:47:03'),
+(3, 'pengepul', 3, 'tes', 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 2, 'perlakuan', 'metod pengeringan', '2024-10-30 17:00:00', '2024-10-30 17:00:00', 3, 'kondis penyimapnan', 'pengemas 1', '2024-10-30 17:00:00', 'pengiriman 1', 0, 'nama pem', 'alamat satu', '2024-10-30 19:53:59', '2024-10-30 19:53:59'),
+(4, 'pedagang', 11, 'tes', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 2, 'perlakuan', 'metode satu', '2024-10-30 17:00:00', '2024-10-30 17:00:00', 56, 'kondis penyimapnan', 'pengemas', '2024-10-30 17:00:00', 'pengiriman', 0, 'nama pemb', 'alama pem', '2024-10-30 19:56:20', '2024-10-30 19:56:20'),
+(5, 'petani', 8, 'tes', NULL, 'lokasi dua', 40, 3, 'varietas dua', '2024-10-30 17:00:00', 40, 40, 40, 'tempat dua', NULL, NULL, NULL, NULL, NULL, 'metode dua', '2024-10-30 17:00:00', '2024-10-30 17:00:00', NULL, NULL, NULL, '2024-10-30 17:00:00', 'kirim dua', 0, 'nama dua', 'alamat dua', '2024-10-30 20:01:03', '2024-10-30 20:01:03');
 
 -- --------------------------------------------------------
 
@@ -8254,8 +8249,9 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `transaksi_eksportirs` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `pengguna_id` int(11) NOT NULL,
   `tanggal_pembelian` timestamp NULL DEFAULT NULL,
-  `nama_penjual` varchar(50) NOT NULL,
+  `pedagang_id` int(11) NOT NULL,
   `jumlah_produk_berdasarkan_mutu` int(11) NOT NULL COMMENT 'kg',
   `kadar_air_produk` int(11) NOT NULL COMMENT 'ph',
   `perlakuan` varchar(50) NOT NULL,
@@ -8282,8 +8278,9 @@ CREATE TABLE `transaksi_eksportirs` (
 
 CREATE TABLE `transaksi_pedagangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `pengguna_id` int(11) NOT NULL,
   `tanggal_pembelian` timestamp NULL DEFAULT NULL,
-  `nama_penjual` varchar(50) NOT NULL,
+  `pengepul_id` int(11) NOT NULL,
   `jumlah_produk_berdasarkan_mutu` int(11) NOT NULL COMMENT 'kg',
   `kadar_air_produk` int(11) NOT NULL COMMENT 'ph',
   `perlakuan` varchar(20) NOT NULL,
@@ -8311,7 +8308,7 @@ CREATE TABLE `transaksi_pedagangs` (
 
 CREATE TABLE `transaksi_pengepuls` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `pengepul_id` int(11) NOT NULL,
+  `pengguna_id` int(11) NOT NULL,
   `tanggal_pembelian` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `petani_id` int(11) NOT NULL,
   `jumlah_produk_berdasarkan_mutu` int(11) NOT NULL COMMENT 'kg',
@@ -8337,7 +8334,7 @@ CREATE TABLE `transaksi_pengepuls` (
 -- Dumping data untuk tabel `transaksi_pengepuls`
 --
 
-INSERT INTO `transaksi_pengepuls` (`id`, `pengepul_id`, `tanggal_pembelian`, `petani_id`, `jumlah_produk_berdasarkan_mutu`, `kadar_air_produk`, `perlakuan`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `kadar_air`, `kondisi_penyimpanan`, `bahan_pengemas`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
+INSERT INTO `transaksi_pengepuls` (`id`, `pengguna_id`, `tanggal_pembelian`, `petani_id`, `jumlah_produk_berdasarkan_mutu`, `kadar_air_produk`, `perlakuan`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `kadar_air`, `kondisi_penyimpanan`, `bahan_pengemas`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
 (1, 0, '2024-10-25 17:00:00', 1, 1, 2, 'perlakuan', 'metod pengeringan', '2024-10-26 17:00:00', '2024-10-27 17:00:00', 3, 'kondis penyimapnan', 'bahan pengemas', '2024-10-29', 'metod pengiriman', 3000, 'nama pemb', 'alamat pem', 'tes', '2024-10-26 15:16:26', '2024-10-26 15:16:26');
 
 -- --------------------------------------------------------
@@ -8348,7 +8345,7 @@ INSERT INTO `transaksi_pengepuls` (`id`, `pengepul_id`, `tanggal_pembelian`, `pe
 
 CREATE TABLE `transaksi_petanis` (
   `id` int(11) NOT NULL,
-  `petani_id` int(11) NOT NULL,
+  `pengguna_id` int(11) NOT NULL,
   `lokasi_kebun` varchar(100) NOT NULL,
   `jumlah_tegakan` int(11) NOT NULL,
   `umur_tanaman` smallint(6) NOT NULL,
@@ -8376,8 +8373,9 @@ CREATE TABLE `transaksi_petanis` (
 -- Dumping data untuk tabel `transaksi_petanis`
 --
 
-INSERT INTO `transaksi_petanis` (`id`, `petani_id`, `lokasi_kebun`, `jumlah_tegakan`, `umur_tanaman`, `varietas_tanaman`, `tanggal_panen`, `jumlah_panen`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `bobot_biji_pala_kering`, `bobot_fuli_kering`, `bahan_pengemas`, `tempat_penyimpanan`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
-(1, 1, 'lokasi', 1, 2, 'varietas', '2024-10-25 17:00:00', 3, 'metod pengeringa', '2024-10-26 17:00:00', '2024-10-27 17:00:00', 30, 20, 'pengemas', 'penyimpanan', '2024-10-30 17:00:00', 'meto pengiriman', 2000, 'nma pep', 'ala pem', 'tes', '2024-10-26 05:02:11', '2024-10-26 05:02:11');
+INSERT INTO `transaksi_petanis` (`id`, `pengguna_id`, `lokasi_kebun`, `jumlah_tegakan`, `umur_tanaman`, `varietas_tanaman`, `tanggal_panen`, `jumlah_panen`, `metode_pengeringan`, `tanggal_mulai_pengeringan`, `tanggal_selesai_pengeringan`, `bobot_biji_pala_kering`, `bobot_fuli_kering`, `bahan_pengemas`, `tempat_penyimpanan`, `tanggal_penjualan`, `metode_pengiriman`, `harga`, `nama_pembeli`, `alamat_pembeli`, `ipfs_hash`, `created_at`, `updated_at`) VALUES
+(3, 7, 'lokasi', 22, 2, 'varietas 2', '2024-10-28 17:00:00', 22, 'metod pengeringa', '2024-10-28 17:00:00', '2024-10-28 17:00:00', 22, 22, 'pengemas2', 'penyimpanan2', '2024-10-28 17:00:00', 'meto pengiriman2', 3000, 'nama pem2', 'alama pem2', 'tes', '2024-10-29 12:31:10', '2024-10-29 12:31:10'),
+(2, 8, 'lokasi', 10, 3, 'varietas', '2024-10-28 17:00:00', 3, 'metod pengeringan', '2024-10-29 17:00:00', '2024-10-30 17:00:00', 30, 20, 'pengemas', 'penyimpanan', '2024-10-31 17:00:00', 'pengiriman satu', 2000, 'tes', 'ala mpemgbe', 'tes', '2024-10-29 12:23:03', '2024-10-29 12:23:03');
 
 -- --------------------------------------------------------
 
@@ -8405,17 +8403,23 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `password_show`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'adm', 'adm@email.com', NULL, '$2y$12$nMxOwo8b1KU8oEbyQTMtQ.xJlvndu.AxgqM0TZ/eGj2P.obC6GeM2', '12345678Ab$', NULL, NULL, '2024-10-27 19:23:01', '2024-10-27 19:23:01'),
 (2, 'Pengepul Satu', 'pengepul1@email.com', NULL, '$2y$12$8I2U.qiq7y0YYWUdiY2b6eIg1jdrXM7XCraMfgVjeFNXFf1gni1BG', '12345678', NULL, NULL, '2024-10-27 20:13:04', '2024-10-27 20:13:04'),
-(3, 'Pengepul Dua', 'pengepul2@email.com', NULL, '$2y$12$653Mstvu.zbLfqxLjYNFu.CeVkm1/ifYdgRXgwmRElkuc.OOAdkjC', '12345678', NULL, NULL, '2024-10-27 20:53:31', '2024-10-27 20:53:31');
+(3, 'Pengepul Dua', 'pengepul2@email.com', NULL, '$2y$12$653Mstvu.zbLfqxLjYNFu.CeVkm1/ifYdgRXgwmRElkuc.OOAdkjC', '12345678', NULL, NULL, '2024-10-27 20:53:31', '2024-10-27 20:53:31'),
+(10, 'Pengepul Tiga', 'pengepul3@email.com', NULL, '$2y$12$WRq2T.XpfuzMGESXqs1af.7b5SLxuZ4iBqCf34RmE5XzjtTxEpXge', '12345678', NULL, NULL, '2024-10-28 21:23:53', '2024-10-28 21:23:53'),
+(11, 'Pengepul Empat', 'pengepul4@email.com', NULL, '$2y$12$WgDYlu4NKd4IF1UKwN5t8.VdzIcsuchjUGOtpFf/Tv2UPjqVnnrKy', '12345678', NULL, NULL, '2024-10-28 21:24:56', '2024-10-28 21:25:18'),
+(12, 'Pedagang Satu', 'pedagang1@email.com', NULL, '$2y$12$ZT8m2CmLZa9MpPpvEixxK.n3A5maeICMJLTvjhQg/yke9KZonC4NK', '12345678', NULL, NULL, '2024-10-28 23:23:53', '2024-10-28 23:23:53'),
+(13, 'Eksportir Satu', 'eksportir1@email.com', NULL, '$2y$12$efeZUaaF4O2LvUjLVIeyK.K/HP4f30fRj8u8fLhtXY8jtu5yzDrAK', '12345678', NULL, NULL, '2024-10-28 23:26:57', '2024-10-28 23:26:57'),
+(14, 'Petani Satu', 'petani1@gmail.com', NULL, '$2y$12$1McU92VsuCV.ELI6vHINAu0XnXqha79MlLMk3k0rcID.J2s/OJOF.', '12345678', NULL, NULL, '2024-10-29 00:36:06', '2024-10-29 00:36:06'),
+(15, 'Petani Dua', 'petani2@email.com', NULL, '$2y$12$djxF5JNR45txKT.dnyJEGOioKQ7ZTqUNvfMfhsOc4xG3twjPUYeUG', '12345678', NULL, NULL, '2024-10-29 00:36:42', '2024-10-29 00:36:42'),
+(16, 'Petani Tiga', 'petani3@email.com', NULL, '$2y$12$JBhy07sRSw0C8qBVOD0e9eKqDFwJLrs3JVqghsSMEXHRfwj9fITGK', '12345678', NULL, NULL, '2024-10-29 00:37:23', '2024-10-29 00:37:23'),
+(17, 'Pengepul Lima', 'pengepul5@email.com', NULL, '$2y$12$fFOPEDLH03NKW6Crh/kWIOSLZaTK2vz1CLnBlICGG2qTZhfjdkI2y', '12345678', NULL, NULL, '2024-10-29 00:38:18', '2024-10-29 00:38:18'),
+(18, 'Pedagang Dua', 'pedagang2@email.com', NULL, '$2y$12$VZxu0rjBrwjHeDtCEFOdBOleHPjmd9UUq5k7aTi5uHdlqAJFIxB.y', '12345678', NULL, NULL, '2024-10-29 00:39:01', '2024-10-29 00:39:01'),
+(19, 'Pedagang Tiga', 'pedagang3@email.com', NULL, '$2y$12$dBk2Em3PwpVZFGAFppuM3.s0rXGolLw4LCmEktrVANJXl6Mm4mLJ.', '12345678', NULL, NULL, '2024-10-29 00:39:42', '2024-10-29 00:39:42'),
+(20, 'Eksportir Dua', 'eksportir2@email.com', NULL, '$2y$12$JcezBjUBan8cEuw2vgMJPuVFksA73v0xMgVwScWFYMokaPIrQCW7W', '12345678', NULL, NULL, '2024-10-29 00:40:21', '2024-10-29 00:40:21'),
+(21, 'Eksportir Tiga', 'eksportir3@email.com', NULL, '$2y$12$T.nTKmeIQJu9QiK4LAzZ8u1R.4uO52jPCW//CQSNTEhbXz9Obhuh.', '12345678', NULL, NULL, '2024-10-29 00:41:36', '2024-10-29 00:41:36');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indeks untuk tabel `eksportirs`
---
-ALTER TABLE `eksportirs`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `failed_jobs`
@@ -8451,18 +8455,6 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indeks untuk tabel `pedagang_besars`
---
-ALTER TABLE `pedagang_besars`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `pengepuls`
---
-ALTER TABLE `pengepuls`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `penggunas`
 --
 ALTER TABLE `penggunas`
@@ -8482,12 +8474,6 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
--- Indeks untuk tabel `petanis`
---
-ALTER TABLE `petanis`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `reg_districts`
@@ -8531,6 +8517,12 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indeks untuk tabel `transaksis`
+--
+ALTER TABLE `transaksis`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `transaksi_eksportirs`
 --
 ALTER TABLE `transaksi_eksportirs`
@@ -8566,12 +8558,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `eksportirs`
---
-ALTER TABLE `eksportirs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -8584,28 +8570,16 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `pedagang_besars`
---
-ALTER TABLE `pedagang_besars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT untuk tabel `pengepuls`
---
-ALTER TABLE `pengepuls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT untuk tabel `penggunas`
 --
 ALTER TABLE `penggunas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -8614,16 +8588,16 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `petanis`
---
-ALTER TABLE `petanis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT untuk tabel `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksis`
+--
+ALTER TABLE `transaksis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi_eksportirs`
@@ -8647,13 +8621,13 @@ ALTER TABLE `transaksi_pengepuls`
 -- AUTO_INCREMENT untuk tabel `transaksi_petanis`
 --
 ALTER TABLE `transaksi_petanis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
