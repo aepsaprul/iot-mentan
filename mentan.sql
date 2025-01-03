@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Nov 2024 pada 03.10
+-- Waktu pembuatan: 03 Jan 2025 pada 03.45
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -102,6 +102,9 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 14),
 (2, 'App\\Models\\User', 15),
 (2, 'App\\Models\\User', 16),
+(2, 'App\\Models\\User', 22),
+(2, 'App\\Models\\User', 23),
+(2, 'App\\Models\\User', 24),
 (3, 'App\\Models\\User', 2),
 (3, 'App\\Models\\User', 3),
 (3, 'App\\Models\\User', 10),
@@ -143,8 +146,8 @@ CREATE TABLE `penggunas` (
   `provinsi_id` int(11) NOT NULL,
   `kabupaten_id` int(11) NOT NULL,
   `kecamatan_id` int(11) NOT NULL,
-  `luas_lahan` int(11) NOT NULL,
-  `komoditas` varchar(50) NOT NULL,
+  `luas_lahan` int(11) DEFAULT NULL,
+  `komoditas` varchar(50) DEFAULT NULL,
   `ipfs_hash` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -166,7 +169,8 @@ INSERT INTO `penggunas` (`id`, `user_id`, `level`, `nama`, `telepon`, `email`, `
 (11, 18, 'pedagang', 'Pedagang Dua', '0987898721', 'pedagang2@email.com', 'alamat pedagang dua', 33, 3304, 330404, 80, 'pala', 'tes', '2024-10-29 00:39:01', '2024-10-29 00:39:01'),
 (12, 19, 'pedagang', 'Pedagang Tiga', '0987898712', 'pedagang3@email.com', 'alamat pedagang tiga', 33, 3305, 330504, 70, 'pala', 'tes', '2024-10-29 00:39:42', '2024-10-29 00:39:42'),
 (13, 20, 'eksportir', 'Eksportir Dua', '0987898722', 'eksportir2@email.com', 'alamat eksportir dua', 15, 1504, 150405, 77, 'pala', 'tes', '2024-10-29 00:40:21', '2024-10-29 00:40:21'),
-(14, 21, 'eksportir', 'Eksportir Tiga', '0987898721', 'eksportir3@email.com', 'alamat eksportir tiga', 33, 3304, 330404, 85, 'pala', 'tes', '2024-10-29 00:41:36', '2024-10-29 00:41:36');
+(14, 21, 'eksportir', 'Eksportir Tiga', '0987898721', 'eksportir3@email.com', 'alamat eksportir tiga', 33, 3304, 330404, 85, 'pala', 'tes', '2024-10-29 00:41:36', '2024-10-29 00:41:36'),
+(15, 24, 'petani', 'Petani Empat', '0987898723', 'petani4@email.com', 'alamat petani empat', 33, 3307, 330706, NULL, NULL, 'tes', '2024-10-31 19:53:26', '2024-10-31 19:53:26');
 
 -- --------------------------------------------------------
 
@@ -8415,7 +8419,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `pa
 (18, 'Pedagang Dua', 'pedagang2@email.com', NULL, '$2y$12$VZxu0rjBrwjHeDtCEFOdBOleHPjmd9UUq5k7aTi5uHdlqAJFIxB.y', '12345678', NULL, NULL, '2024-10-29 00:39:01', '2024-10-29 00:39:01'),
 (19, 'Pedagang Tiga', 'pedagang3@email.com', NULL, '$2y$12$dBk2Em3PwpVZFGAFppuM3.s0rXGolLw4LCmEktrVANJXl6Mm4mLJ.', '12345678', NULL, NULL, '2024-10-29 00:39:42', '2024-10-29 00:39:42'),
 (20, 'Eksportir Dua', 'eksportir2@email.com', NULL, '$2y$12$JcezBjUBan8cEuw2vgMJPuVFksA73v0xMgVwScWFYMokaPIrQCW7W', '12345678', NULL, NULL, '2024-10-29 00:40:21', '2024-10-29 00:40:21'),
-(21, 'Eksportir Tiga', 'eksportir3@email.com', NULL, '$2y$12$T.nTKmeIQJu9QiK4LAzZ8u1R.4uO52jPCW//CQSNTEhbXz9Obhuh.', '12345678', NULL, NULL, '2024-10-29 00:41:36', '2024-10-29 00:41:36');
+(21, 'Eksportir Tiga', 'eksportir3@email.com', NULL, '$2y$12$T.nTKmeIQJu9QiK4LAzZ8u1R.4uO52jPCW//CQSNTEhbXz9Obhuh.', '12345678', NULL, NULL, '2024-10-29 00:41:36', '2024-10-29 00:41:36'),
+(24, 'Petani Empat', 'petani4@email.com', NULL, '$2y$12$TPlN.zpfkN8zHxbCR2KCzOi7YsS8n7tLACdXVgUApYF6pI93MLmvm', '12345678', 'petani', NULL, '2024-10-31 19:53:26', '2024-10-31 19:53:26');
 
 --
 -- Indexes for dumped tables
@@ -8573,7 +8578,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `penggunas`
 --
 ALTER TABLE `penggunas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `permissions`
@@ -8627,7 +8632,7 @@ ALTER TABLE `transaksi_petanis`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
